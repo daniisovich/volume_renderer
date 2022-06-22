@@ -1,7 +1,6 @@
 #include "glwindow.h"
 
 #include <stdexcept>
-#include <iostream>
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -19,13 +18,13 @@ GLWindow::GLWindow(int width, int height, const std::string& name) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	m_window = std::unique_ptr<GLFWwindow, DestroyGLFWwindow>(glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr));
+	m_window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
 	if (!m_window) {
 		glfwTerminate();
 		throw std::runtime_error("Failed to create GLFW window");
 	}
 
-	glfwMakeContextCurrent(m_window.get());
+	glfwMakeContextCurrent(m_window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		glfwTerminate();
@@ -34,14 +33,14 @@ GLWindow::GLWindow(int width, int height, const std::string& name) {
 
 	glViewport(0, 0, width, height);
 
-	glfwSetFramebufferSizeCallback(m_window.get(), framebuffer_size_callback);
-	glfwSetKeyCallback(m_window.get(), key_callback);
+	glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
+	glfwSetKeyCallback(m_window, key_callback);
 
 }
 
 GLWindow::~GLWindow() {
-	
-	glfwDestroyWindow(m_window.get());
+
+	glfwDestroyWindow(m_window);
 	glfwTerminate();
 
 }
