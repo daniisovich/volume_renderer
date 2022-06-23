@@ -11,7 +11,7 @@ class GLWindow {
 public:
 
 	GLWindow();
-	GLWindow(int width, int height, const std::string& name);
+	GLWindow(int width, int height, const std::string_view name);
 	~GLWindow();
 
 	inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }

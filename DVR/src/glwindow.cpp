@@ -9,7 +9,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 GLWindow::GLWindow() : GLWindow{ 800, 600, "Window" } {}
 
-GLWindow::GLWindow(int width, int height, const std::string& name) {
+GLWindow::GLWindow(int width, int height, const std::string_view name) {
 
 	if (!glfwInit())
 		throw std::runtime_error("Failed to initialize GLFW");
@@ -18,7 +18,7 @@ GLWindow::GLWindow(int width, int height, const std::string& name) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	m_window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
+	m_window = glfwCreateWindow(width, height, name.data(), nullptr, nullptr);
 	if (!m_window) {
 		glfwTerminate();
 		throw std::runtime_error("Failed to create GLFW window");
