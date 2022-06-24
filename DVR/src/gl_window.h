@@ -15,6 +15,7 @@ public:
 
 	glWindow();
 	glWindow(int width, int height, const std::string_view name);
+	glWindow(glWindow&& other) noexcept;
 	~glWindow();
 
 	inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }
@@ -22,6 +23,8 @@ public:
 		glfwSwapBuffers(m_window);
 		glfwPollEvents();
 	}
+
+	inline const GLFWwindow* window() const { return m_window; }
 
 private:
 

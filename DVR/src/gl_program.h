@@ -16,6 +16,7 @@ public:
 	glProgram& operator=(const glProgram&) = delete;
 
 	glProgram();
+	glProgram(glProgram&& other) noexcept;
 	~glProgram();
 
 	void load(const std::vector<ShaderInfo>& shaders) const;
@@ -28,6 +29,6 @@ public:
 
 private:
 
-	GLuint m_id;
+	GLuint m_id{ 0 };
 
 };

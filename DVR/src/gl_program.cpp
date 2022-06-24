@@ -10,6 +10,10 @@ void linkStatus(GLuint program_id);
 
 glProgram::glProgram() : m_id{ glCreateProgram() } {}
 
+glProgram::glProgram(glProgram&& other) noexcept : m_id{ other.m_id } {
+	other.m_id = 0;
+}
+
 glProgram::~glProgram() {
 	glDeleteProgram(m_id);
 }

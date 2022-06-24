@@ -9,6 +9,14 @@ void compileStatus(GLuint shader_id);
 std::string shaderType(GLuint shader_id);
 
 
+glShader::glShader(glShader&& other) noexcept : m_id{ other.m_id } {
+	other.m_id = 0;
+}
+
+glShader::~glShader() {
+	glDeleteShader(m_id);
+}
+
 void glShader::load(ShaderInfo info) {
 
 	m_id = glCreateShader(info.type);
@@ -19,10 +27,6 @@ void glShader::load(ShaderInfo info) {
 	glCompileShader(m_id);
 	compileStatus(m_id);
 
-}
-
-glShader::~glShader() {
-	glDeleteShader(m_id);
 }
 
 std::string loadSource(std::string_view path) {

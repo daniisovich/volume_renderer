@@ -2,10 +2,11 @@
 
 #include <stdexcept>
 
+#include "gl_debug.h"
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
 
 glWindow::glWindow() : glWindow{ 800, 600, "Window" } {}
 
@@ -31,12 +32,18 @@ glWindow::glWindow(int width, int height, const std::string_view name) {
 		throw std::runtime_error("Failed to initialize GLAD");
 	}
 
+	gl_debug::debug_callback();
+
 	// the glfwWindowHint commands for context version produce error 1282
 	glGetError();
 
 	glViewport(0, 0, width, height);
 	setCallbacks();
 	
+}
+
+glWindow::glWindow(glWindow&& other) noexcept : m_window{ other.m_window } {
+	other.m_window = nullptr;
 }
 
 glWindow::~glWindow() {

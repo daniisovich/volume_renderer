@@ -19,6 +19,7 @@ public:
 	glShader(const glShader&) = delete;
 	glShader& operator=(const glShader&) = delete;
 	
+	glShader(glShader&& other) noexcept;
 	~glShader();
 	void load(ShaderInfo info);
 
