@@ -1,4 +1,4 @@
-#include "glwindow.h"
+#include "gl_window.h"
 
 #include <stdexcept>
 
@@ -7,13 +7,13 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 
-GLWindow::GLWindow() : GLWindow{ 800, 600, "Window" } {}
+glWindow::glWindow() : glWindow{ 800, 600, "Window" } {}
 
-GLWindow::GLWindow(int width, int height, const std::string_view name) {
+glWindow::glWindow(int width, int height, const std::string_view name) {
 
 	if (!glfwInit())
 		throw std::runtime_error("Failed to initialize GLFW");
-	
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -23,26 +23,30 @@ GLWindow::GLWindow(int width, int height, const std::string_view name) {
 		glfwTerminate();
 		throw std::runtime_error("Failed to create GLFW window");
 	}
-
 	glfwMakeContextCurrent(m_window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		glfwDestroyWindow(m_window);
 		glfwTerminate();
 		throw std::runtime_error("Failed to initialize GLAD");
 	}
 
+	// the glfwWindowHint commands for context version produce error 1282
+	glGetError();
+
 	glViewport(0, 0, width, height);
-
-	glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-	glfwSetKeyCallback(m_window, key_callback);
-
+	setCallbacks();
+	
 }
 
-GLWindow::~GLWindow() {
-
+glWindow::~glWindow() {
 	glfwDestroyWindow(m_window);
 	glfwTerminate();
+}
 
+void glWindow::setCallbacks() const {
+	glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
+	glfwSetKeyCallback(m_window, key_callback);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {

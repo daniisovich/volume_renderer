@@ -6,13 +6,16 @@
 #include <string>
 
 
-class GLWindow {
+class glWindow {
 
 public:
 
-	GLWindow();
-	GLWindow(int width, int height, const std::string_view name);
-	~GLWindow();
+	glWindow(const glWindow&) = delete;
+	glWindow& operator=(const glWindow&) = delete;
+
+	glWindow();
+	glWindow(int width, int height, const std::string_view name);
+	~glWindow();
 
 	inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }
 	inline void swapAndPoll() const {
@@ -21,6 +24,8 @@ public:
 	}
 
 private:
+
+	void setCallbacks() const;
 
 	GLFWwindow* m_window;
 
