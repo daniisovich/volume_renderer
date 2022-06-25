@@ -39,6 +39,12 @@
     <ClCompile Include="src\gl_vbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\gl_framebuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gl_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gl_window.h">
@@ -62,9 +68,16 @@
     <ClInclude Include="src\gl_vbo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\gl_framebuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gl_texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\front_face.vert" />
     <None Include="src\shaders\front_face.frag" />
+    <None Include="src\shaders\back_face.frag" />
   </ItemGroup>
 </Project>
