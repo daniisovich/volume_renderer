@@ -25,6 +25,7 @@ public:
 	}
 
 	inline const GLFWwindow* window() const { return m_window; }
+	std::pair<int, int> size() const;
 
 private:
 

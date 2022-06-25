@@ -8,7 +8,7 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-glWindow::glWindow() : glWindow{ 800, 600, "Window" } {}
+glWindow::glWindow() : glWindow { 800, 600, "Window" } {}
 
 glWindow::glWindow(int width, int height, const std::string_view name) {
 
@@ -49,6 +49,12 @@ glWindow::glWindow(glWindow&& other) noexcept : m_window{ other.m_window } {
 glWindow::~glWindow() {
 	glfwDestroyWindow(m_window);
 	glfwTerminate();
+}
+
+std::pair<int, int> glWindow::size() const {
+	int width{ 0 }, height{ 0 };
+	glfwGetWindowSize(m_window, &width, &height);
+	return { width, height };
 }
 
 void glWindow::setCallbacks() const {
