@@ -3,7 +3,6 @@
 #include <stdexcept>
 
 #include "gl_debug.h"
-#include "window_callbacks.h"
 
 
 glWindow::glWindow() : glWindow { 800, 600, "Window" } {}
