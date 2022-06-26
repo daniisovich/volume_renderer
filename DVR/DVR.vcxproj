@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\gl_camera.cpp" />
     <ClCompile Include="src\gl_framebuffer.cpp" />
     <ClCompile Include="src\gl_program.cpp" />
     <ClCompile Include="src\gl_shader.cpp" />
@@ -168,9 +169,11 @@
     <ClCompile Include="src\gl_window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\unit_cube.cpp" />
+    <ClCompile Include="src\window_callbacks.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\gl_camera.h" />
     <ClInclude Include="src\gl_framebuffer.h" />
     <ClInclude Include="src\gl_texture.h" />
     <ClInclude Include="src\gl_vbo.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="src\gl_vao.h" />
     <ClInclude Include="src\gl_window.h" />
     <ClInclude Include="src\gl_program.h" />
+    <ClInclude Include="src\window_callbacks.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\back_face.frag" />

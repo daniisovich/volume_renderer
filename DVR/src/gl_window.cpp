@@ -3,10 +3,8 @@
 #include <stdexcept>
 
 #include "gl_debug.h"
+#include "window_callbacks.h"
 
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 glWindow::glWindow() : glWindow { 800, 600, "Window" } {}
 
@@ -55,21 +53,4 @@ std::pair<int, int> glWindow::size() const {
 	int width{ 0 }, height{ 0 };
 	glfwGetWindowSize(m_window, &width, &height);
 	return { width, height };
-}
-
-void glWindow::setCallbacks() const {
-	glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-	glfwSetKeyCallback(m_window, key_callback);
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-	glViewport(0, 0, width, height);
-}
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	}
-
 }
