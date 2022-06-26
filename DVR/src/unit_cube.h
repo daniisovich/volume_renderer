@@ -14,7 +14,7 @@ public:
 	inline void bind() const { m_vao.bind(); }
 	inline void unbind() const { m_vao.unbind(); }
 
-	inline int indexCount() const { return m_indices.size(); }
+	inline uint32_t indexCount() const { return uint32_t(m_indices.size()); }
 
 private:
 
