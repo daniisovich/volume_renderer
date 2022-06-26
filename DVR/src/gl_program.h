@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #include <string>
 #include <vector>
@@ -26,6 +27,9 @@ public:
 
 	inline GLuint attributeLocation(const std::string& name) const { return glGetAttribLocation(m_id, name.c_str()); }
 	inline GLuint uniformLocation(const std::string& name) const { return glGetUniformLocation(m_id, name.c_str()); }
+
+	void setUniform(const char* name, const glm::mat4& matrix) const;
+	void setUniform(GLint location, const glm::mat4& matrix) const;
 
 private:
 

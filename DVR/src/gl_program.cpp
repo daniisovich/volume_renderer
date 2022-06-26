@@ -1,5 +1,7 @@
 #include "gl_program.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include <stdexcept>
 #include <fstream>
 #include <sstream>
@@ -29,6 +31,15 @@ void glProgram::load(const std::vector<ShaderInfo>& shader_infos) const {
 	glLinkProgram(m_id);
 	linkStatus(m_id);	
 
+}
+
+void glProgram::setUniform(const char* name, const glm::mat4& matrix) const {
+	GLint location{ glGetUniformLocation(m_id, name) };
+	setUniform(location, matrix);
+}
+
+void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void linkStatus(GLuint program_id) {
