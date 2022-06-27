@@ -33,9 +33,18 @@ void glProgram::load(const std::vector<ShaderInfo>& shader_infos) const {
 
 }
 
+void glProgram::setUniform(const char* name, GLint value) const {
+	GLint location{ glGetUniformLocation(m_id, name) };
+	setUniform(location, value);
+}
+
 void glProgram::setUniform(const char* name, const glm::mat4& matrix) const {
 	GLint location{ glGetUniformLocation(m_id, name) };
 	setUniform(location, matrix);
+}
+
+void glProgram::setUniform(GLint location, GLint value) const {
+	glUniform1i(location, value);
 }
 
 void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {
