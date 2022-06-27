@@ -19,23 +19,16 @@ void renderVolume(const glWindow& window) {
 	first_pass.load({ {GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"} });
 	second_pass.load({ {GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"} });
 
-	GLuint vertex_position_loc{ first_pass.attributeLocation("vert_position") };
-
+	GLint vertex_position_loc{ 0 };
 	UnitCube cube{ vertex_position_loc };
 
 	glFramebuffer front_faces{};
-	glTexture texture{ GL_TEXTURE_2D };
+	glTexture front_face_tex{ GL_TEXTURE_2D };
 	{
 		auto [width, height] = window.size();
-		texture.attach(GL_RGB, GL_RGB, width, height, GL_UNSIGNED_BYTE);
+		front_face_tex.attach(GL_RGB, GL_RGB, width, height, GL_UNSIGNED_BYTE);
 	}
-	front_faces.attach(texture, 0, 0);
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-	cube.bind();
-
-	GLuint mvp_loc{ 0 };
+	front_faces.attach(front_face_tex, 0, 0);
 
 	glm::mat4 model{ glm::mat4(1.0f) };
 	model = glm::rotate(model, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -46,25 +39,39 @@ void renderVolume(const glWindow& window) {
 
 	glm::mat4 mvp = proj * view * model;
 
+	struct {
+		GLint mvp{ 0 };
+		GLint front_faces{ 1 };
+	} uniform_loc;
+
+	first_pass.enable();
+	first_pass.setUniform(uniform_loc.mvp, mvp);
+
+	second_pass.enable();
+	second_pass.setUniform(uniform_loc.mvp, mvp);
+	second_pass.setUniform(uniform_loc.front_faces, 0);
+	front_face_tex.activate(0);
+
+	cube.bind();
+
 	glEnable(GL_CULL_FACE);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 	while (!window.shouldClose()) {
 
 		front_faces.bind();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glCullFace(GL_FRONT);
 
 		first_pass.enable();
-		first_pass.setUniform("mvp", mvp);
-		glDrawElements(GL_TRIANGLES, cube.indexCount(), GL_UNSIGNED_INT, 0);
+		cube.draw();
 
 		front_faces.unbind();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glCullFace(GL_BACK);
 
 		second_pass.enable();
-		second_pass.setUniform("mvp", mvp);
-		texture.bind();
-		glDrawElements(GL_TRIANGLES, cube.indexCount(), GL_UNSIGNED_INT, 0);
+		cube.draw();
 
 		window.swapAndPoll();
 
@@ -76,8 +83,6 @@ void renderVolume(const glWindow& window) {
 
 
 int main() {
-	
-	std::cout << "Direct Volume Renderer start" << std::endl;
 
 	try {
 
