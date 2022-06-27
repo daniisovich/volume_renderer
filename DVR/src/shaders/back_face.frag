@@ -3,7 +3,9 @@
 in vec3 frag_position;
 out vec4 color;
 
-uniform sampler2D front_faces;
+layout (location = 1) uniform sampler2D front_faces;
+layout (location = 2) uniform sampler3D volume;
+layout (location = 3) uniform sampler1D transfer_function;
 
 
 void main() {
