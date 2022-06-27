@@ -14,7 +14,7 @@ public:
 	glVbo& operator=(const glVbo&) = delete;
 
 	glVbo(const std::vector<float>& data);
-	glVbo(const std::vector<int>& data);
+	glVbo(const std::vector<uint32_t>& data);
 	glVbo(glVbo&& other) noexcept;
 	~glVbo();
 

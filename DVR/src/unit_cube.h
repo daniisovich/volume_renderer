@@ -9,12 +9,12 @@ class UnitCube {
 
 public:
 
-	UnitCube(unsigned int position_location);
+	UnitCube(int32_t position_location);
 
 	inline void bind() const { m_vao.bind(); }
 	inline void unbind() const { m_vao.unbind(); }
 
-	inline uint32_t indexCount() const { return uint32_t(m_indices.size()); }
+	inline void draw() const { glDrawElements(GL_TRIANGLES, GLsizei(m_indices.size()), GL_UNSIGNED_INT, 0); }
 
 private:
 
@@ -33,7 +33,7 @@ private:
 		 0.5f, -0.5f, -0.5f,
 	};
 
-	const std::vector<int> m_indices{
+	const std::vector<uint32_t> m_indices{
 		0, 2, 3, 0, 3, 1,
 		2, 6, 7, 2, 7, 3,
 		6, 4, 5, 6, 5, 7,

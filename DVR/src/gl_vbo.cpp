@@ -10,12 +10,12 @@ glVbo::glVbo(const std::vector<float>& data) {
 
 }
 
-glVbo::glVbo(const std::vector<int>& data) {
+glVbo::glVbo(const std::vector<uint32_t>& data) {
 
 	glGenBuffers(1, &m_id);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_id);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLint) * data.size(), data.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * data.size(), data.data(), GL_STATIC_DRAW);
 
 }
 

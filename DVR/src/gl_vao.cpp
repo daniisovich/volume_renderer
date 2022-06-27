@@ -28,7 +28,7 @@ void glVao::add(const std::vector<float>& data, int attrib_location, int attrib_
 
 }
 
-void glVao::add(const std::vector<int>& data) const {
+void glVao::add(const std::vector<uint32_t>& data) const {
 
 	bind();
 	glVbo ebo{ data };
