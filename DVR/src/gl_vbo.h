@@ -20,6 +20,8 @@ public:
 	glVbo(glVbo&& other) noexcept;
 	glVbo& operator=(glVbo&& other) noexcept;
 
+	GLuint id() const { return m_id.value; }
+
 private:
 
 	struct ID {

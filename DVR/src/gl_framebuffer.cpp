@@ -7,8 +7,7 @@
 
 glFramebuffer::glFramebuffer(const glTexture2D& texture, uint32_t attachment, uint32_t mipmap_level) : m_id{} {
 
-	glNamedFramebufferTexture(m_id.value, GL_COLOR_ATTACHMENT0 + attachment, texture.id(), mipmap_level);	
-
+	glNamedFramebufferTexture(m_id.value, GL_COLOR_ATTACHMENT0 + attachment, texture.id(), mipmap_level);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 		throw std::runtime_error("Error::Framebuffer::NotComplete");
 	}

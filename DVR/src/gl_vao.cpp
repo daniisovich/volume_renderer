@@ -36,17 +36,14 @@ void glVao::add(const std::vector<float>& data, int attrib_location, int attrib_
 
 	glVbo vbo{ data };
 
-	bind();
-	glVertexAttribPointer(attrib_location, attrib_size, GL_FLOAT, normalized, stride, (void*)offset);
-	glEnableVertexAttribArray(attrib_location);
-	unbind();
+	glVertexArrayVertexBuffer(m_id, 0, vbo.id(), 0, stride);
+	glEnableVertexArrayAttrib(m_id, attrib_location);
+	glVertexArrayAttribFormat(m_id, attrib_location, attrib_size, GL_FLOAT, normalized, offset);
+	glVertexArrayAttribBinding(m_id, attrib_location, 0);
 
 }
 
 void glVao::add(const std::vector<uint32_t>& data) const {
-
-	bind();
 	glVbo ebo{ data };
-	unbind();
-
+	glVertexArrayElementBuffer(m_id, ebo.id());
 }
