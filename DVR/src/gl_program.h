@@ -38,8 +38,8 @@ public:
 private:
 
 	struct ID {
-		ID() : value{ glCreateProgram() } { printf("Constructor ID\n"); }
-		~ID() { glDeleteProgram(value); printf("Destructor ID\n"); }
+		ID() : value{ glCreateProgram() } {}
+		~ID() { glDeleteProgram(value); }
 		GLuint value{ 0 };
 	} m_id;
 
