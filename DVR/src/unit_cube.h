@@ -9,7 +9,7 @@ class UnitCube {
 
 public:
 
-	UnitCube(int32_t position_location);
+	UnitCube(int32_t position_location = 0);
 
 	inline void bind() const { m_vao.bind(); }
 	inline void unbind() const { m_vao.unbind(); }
