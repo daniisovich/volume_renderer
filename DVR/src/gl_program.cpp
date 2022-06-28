@@ -10,45 +10,17 @@
 void linkStatus(GLuint program_id);
 
 
-glProgram::glProgram() : m_id{ glCreateProgram() } {}
+glProgram::glProgram(const std::vector<ShaderInfo>& shader_infos) : m_id{} {
 
-glProgram::glProgram(glProgram&& other) noexcept : m_id{ other.m_id } {
-	other.m_id = 0;
-}
-
-glProgram::~glProgram() {
-	glDeleteProgram(m_id);
-}
-
-void glProgram::load(const std::vector<ShaderInfo>& shader_infos) const {
-	
 	std::vector<glShader> shaders(shader_infos.size());
 	for (int i{ 0 }; i < shaders.size(); ++i) {
 		shaders[i].load(shader_infos[i]);
-		glAttachShader(m_id, shaders[i].id());
+		glAttachShader(m_id.value, shaders[i].id());
 	}
 
-	glLinkProgram(m_id);
-	linkStatus(m_id);	
+	glLinkProgram(m_id.value);
+	linkStatus(m_id.value);
 
-}
-
-void glProgram::setUniform(const char* name, GLint value) const {
-	GLint location{ glGetUniformLocation(m_id, name) };
-	setUniform(location, value);
-}
-
-void glProgram::setUniform(const char* name, const glm::mat4& matrix) const {
-	GLint location{ glGetUniformLocation(m_id, name) };
-	setUniform(location, matrix);
-}
-
-void glProgram::setUniform(GLint location, GLint value) const {
-	glUniform1i(location, value);
-}
-
-void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {
-	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void linkStatus(GLuint program_id) {
@@ -64,4 +36,26 @@ void linkStatus(GLuint program_id) {
 
 		throw std::runtime_error("Error::Program::ID" + std::to_string(program_id) + "::LinkingFailed\n" + log);
 	}
+}
+
+glProgram::glProgram(glProgram&& other) noexcept : m_id{ other.m_id } {
+	other.m_id.value = 0;
+}
+
+void glProgram::setUniform(const char* name, GLint value) const {
+	GLint location{ glGetUniformLocation(m_id.value, name)};
+	setUniform(location, value);
+}
+
+void glProgram::setUniform(const char* name, const glm::mat4& matrix) const {
+	GLint location{ glGetUniformLocation(m_id.value, name)};
+	setUniform(location, matrix);
+}
+
+void glProgram::setUniform(GLint location, GLint value) const {
+	glUniform1i(location, value);
+}
+
+void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }

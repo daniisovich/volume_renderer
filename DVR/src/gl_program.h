@@ -13,20 +13,20 @@ class glProgram {
 
 public:
 
+	glProgram() = delete;
 	glProgram(const glProgram&) = delete;
 	glProgram& operator=(const glProgram&) = delete;
+	~glProgram() = default;
 
-	glProgram();
+	glProgram(const std::vector<ShaderInfo>& shader_infos);
+
 	glProgram(glProgram&& other) noexcept;
-	~glProgram();
 
-	void load(const std::vector<ShaderInfo>& shaders) const;
-
-	inline void enable() const { glUseProgram(m_id); }
+	inline void enable() const { glUseProgram(m_id.value); }
 	inline void disable() const { glUseProgram(0); }
 
-	inline GLint attributeLocation(const std::string& name) const { return glGetAttribLocation(m_id, name.c_str()); }
-	inline GLint uniformLocation(const std::string& name) const { return glGetUniformLocation(m_id, name.c_str()); }
+	inline GLint attributeLocation(const std::string& name) const { return glGetAttribLocation(m_id.value, name.c_str()); }
+	inline GLint uniformLocation(const std::string& name) const { return glGetUniformLocation(m_id.value, name.c_str()); }
 
 
 	void setUniform(const char* name, GLint value) const;
@@ -37,6 +37,10 @@ public:
 
 private:
 
-	GLuint m_id{ 0 };
+	struct ID {
+		ID() : value{ glCreateProgram() } { printf("Constructor ID\n"); }
+		~ID() { glDeleteProgram(value); printf("Destructor ID\n"); }
+		GLuint value{ 0 };
+	} m_id;
 
 };

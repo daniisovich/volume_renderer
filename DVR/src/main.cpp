@@ -15,9 +15,8 @@
 
 void renderVolume(const glWindow& window) {
 
-	glProgram first_pass, second_pass;
-	first_pass.load({ {GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"} });
-	second_pass.load({ {GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"} });
+	glProgram first_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"}}), 
+			 second_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"}});
 
 	GLint vertex_position_loc{ 0 };
 	UnitCube cube{ vertex_position_loc };
