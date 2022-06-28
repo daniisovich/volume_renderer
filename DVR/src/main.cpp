@@ -15,8 +15,8 @@
 
 void renderVolume(const glWindow& window) {
 
-	glProgram first_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"}}), 
-			 second_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"}});
+	glProgram first_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"}});
+	glProgram second_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"}});
 
 	GLint vertex_position_loc{ 0 };
 	UnitCube cube{ vertex_position_loc };
@@ -33,18 +33,14 @@ void renderVolume(const glWindow& window) {
 	glm::mat4 proj{ glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f) };
 
 	glm::mat4 mvp = proj * view * model;
-
-	struct {
-		GLint mvp{ 0 };
-	} uniform_loc;
 	
 	struct {
 		GLint front_faces{ 0 };
 	}uniform_bindings;
 
-	first_pass.setUniform(uniform_loc.mvp, mvp);
+	first_pass.setUniform("mvp", mvp);
 
-	second_pass.setUniform(uniform_loc.mvp, mvp);
+	second_pass.setUniform("mvp", mvp);
 	front_face_tex.activate(uniform_bindings.front_faces);
 
 	cube.bind();

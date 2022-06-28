@@ -3,10 +3,18 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#include <unordered_map>
 #include <string>
 #include <vector>
 
 #include "gl_shader.h"
+
+
+struct UniformInfo {
+	GLint location;
+	GLsizei count;
+	GLenum type;
+};
 
 
 class glProgram {
@@ -26,16 +34,17 @@ public:
 	inline void enable() const { glUseProgram(m_id.value); }
 	inline void disable() const { glUseProgram(0); }
 
-	void setUniform(const char* name, GLint value) const;
-	void setUniform(const char* name, const glm::mat4& matrix) const;
+	void setUniform(const char* name, GLint value);
+	void setUniform(const char* name, const glm::mat4& matrix);
 
 	void setUniform(GLint location, GLint value) const;
 	void setUniform(GLint location, const glm::mat4& matrix) const;
 
 	inline GLint attributeLocation(const std::string& name) const { return glGetAttribLocation(m_id.value, name.c_str()); }
-	inline GLint uniformLocation(const std::string& name) const { return glGetUniformLocation(m_id.value, name.c_str()); }
 
 private:
+
+	void retrieveUniforms();
 
 	struct ID {
 		ID() : value{ glCreateProgram() } {}
@@ -43,5 +52,7 @@ private:
 		void release() { glDeleteProgram(value); value = 0; }
 		GLuint value{ 0 };
 	} m_id;
+
+	std::unordered_map<std::string, UniformInfo> m_uniforms{};
 
 };
