@@ -9,12 +9,14 @@ class glVao {
 
 public:
 
+	glVao();
+	~glVao();
+
 	glVao(const glVao&) = delete;
 	glVao& operator=(const glVao&) = delete;
 
-	glVao();
 	glVao(glVao&& other) noexcept;
-	~glVao();
+	glVao& operator=(glVao&& other) noexcept;
 
 	void add(const std::vector<float>& data, int attrib_location, int attrib_size, int stride, int offset = 0, bool normalized = false) const;
 	void add(const std::vector<uint32_t>& data) const;
@@ -24,6 +26,8 @@ public:
 
 private:
 
-	GLuint m_id;
+	void release();
+
+	GLuint m_id{ 0 };
 
 };

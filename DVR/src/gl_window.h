@@ -10,13 +10,17 @@ class glWindow {
 
 public:
 
+	glWindow();
+	glWindow(uint32_t width, uint32_t height, const std::string_view name);
+	~glWindow();
+
 	glWindow(const glWindow&) = delete;
 	glWindow& operator=(const glWindow&) = delete;
 
-	glWindow();
-	glWindow(int width, int height, const std::string_view name);
 	glWindow(glWindow&& other) noexcept;
-	~glWindow();
+	glWindow& operator=(glWindow&& other) noexcept;	
+
+	std::pair<uint32_t, uint32_t> size() const;
 
 	inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }
 	inline void swapAndPoll() const {
@@ -25,10 +29,10 @@ public:
 	}
 
 	inline const GLFWwindow* window() const { return m_window; }
-	std::pair<int, int> size() const;
 
 private:
 
+	void release();
 	void setCallbacks() const;
 
 	GLFWwindow* m_window;

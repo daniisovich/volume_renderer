@@ -21,13 +21,9 @@ void renderVolume(const glWindow& window) {
 	GLint vertex_position_loc{ 0 };
 	UnitCube cube{ vertex_position_loc };
 
-	glFramebuffer front_faces{};
-	glTexture front_face_tex{ GL_TEXTURE_2D };
-	{
-		auto [width, height] = window.size();
-		front_face_tex.attach(GL_RGB, GL_RGB, width, height, GL_UNSIGNED_BYTE);
-	}
-	front_faces.attach(front_face_tex, 0, 0);
+	auto [width, height] = window.size();
+	glTexture2D front_face_tex{ GL_RGBA, width, height, GL_UNSIGNED_BYTE };
+	glFramebuffer front_faces{front_face_tex, 0, 0};
 
 	glm::mat4 model{ glm::mat4(1.0f) };
 	model = glm::rotate(model, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -75,8 +71,6 @@ void renderVolume(const glWindow& window) {
 		window.swapAndPoll();
 
 	}
-
-	cube.unbind();
 
 }
 

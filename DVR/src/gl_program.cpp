@@ -12,11 +12,14 @@ void linkStatus(GLuint program_id);
 
 glProgram::glProgram(const std::vector<ShaderInfo>& shader_infos) : m_id{} {
 
-	std::vector<glShader> shaders(shader_infos.size());
-	for (int i{ 0 }; i < shaders.size(); ++i) {
-		shaders[i].load(shader_infos[i]);
-		glAttachShader(m_id.value, shaders[i].id());
-	}
+	std::vector<glShader> shaders;
+	shaders.reserve(shader_infos.size());
+
+	for (const auto& info : shader_infos)
+		shaders.push_back(std::move(glShader(info)));
+
+	for (const auto& shader : shaders)
+		glAttachShader(m_id.value, shader.id());
 
 	glLinkProgram(m_id.value);
 	linkStatus(m_id.value);
@@ -40,6 +43,16 @@ void linkStatus(GLuint program_id) {
 
 glProgram::glProgram(glProgram&& other) noexcept : m_id{ other.m_id } {
 	other.m_id.value = 0;
+}
+
+glProgram& glProgram::operator=(glProgram&& other) noexcept {
+
+	if (this != &other) {
+		m_id.release();
+		std::swap(m_id, other.m_id);
+	}
+	return *this;
+
 }
 
 void glProgram::setUniform(const char* name, GLint value) const {

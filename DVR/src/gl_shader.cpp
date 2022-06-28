@@ -9,23 +9,29 @@ void compileStatus(GLuint shader_id);
 std::string shaderType(GLuint shader_id);
 
 
-glShader::glShader(glShader&& other) noexcept : m_id{ other.m_id } {
-	other.m_id = 0;
-}
+glShader::glShader(ShaderInfo info) : m_id{ info.type } {
 
-glShader::~glShader() {
-	glDeleteShader(m_id);
-}
-
-void glShader::load(ShaderInfo info) {
-
-	m_id = glCreateShader(info.type);
-	std::string source_str{ loadSource(info.path) };
+	const std::string source_str{ loadSource(info.path) };
 	const char* source{ source_str.c_str() };
 
-	glShaderSource(m_id, 1, &source, nullptr);
-	glCompileShader(m_id);
-	compileStatus(m_id);
+	glShaderSource(m_id.value, 1, &source, nullptr);
+
+	glCompileShader(m_id.value);
+	compileStatus(m_id.value);
+
+}
+
+glShader::glShader(glShader&& other) noexcept : m_id{ other.m_id } {
+	other.m_id.value = 0;
+}
+
+glShader& glShader::operator=(glShader&& other) noexcept {
+
+	if (this != &other) {
+		m_id.release();
+		std::swap(m_id, other.m_id);
+	}
+	return *this;
 
 }
 

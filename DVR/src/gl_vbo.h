@@ -9,17 +9,24 @@ class glVbo {
 
 public:
 
+	glVbo(const std::vector<float>& data);
+	glVbo(const std::vector<uint32_t>& data);
+
 	glVbo() = delete;
 	glVbo(const glVbo&) = delete;
 	glVbo& operator=(const glVbo&) = delete;
+	~glVbo() = default;
 
-	glVbo(const std::vector<float>& data);
-	glVbo(const std::vector<uint32_t>& data);
 	glVbo(glVbo&& other) noexcept;
-	~glVbo();
+	glVbo& operator=(glVbo&& other) noexcept;
 
 private:
 
-	GLuint m_id;
+	struct ID {
+		ID() { glCreateBuffers(1, &value); }
+		~ID() { release(); }
+		void release() { glDeleteBuffers(1, &value); value = 0; }
+		GLuint value{ 0 };
+	} m_id;
 
 };

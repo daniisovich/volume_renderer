@@ -10,23 +10,28 @@ struct ShaderInfo {
 	std::string_view path;
 };
 
-
 class glShader {
 
 public:
 
-	glShader() = default;
+	glShader(ShaderInfo info);
+
+	glShader() = delete;
 	glShader(const glShader&) = delete;
 	glShader& operator=(const glShader&) = delete;
-	
-	glShader(glShader&& other) noexcept;
-	~glShader();
-	void load(ShaderInfo info);
+	~glShader() = default;
 
-	inline GLuint id() const { return m_id; }
+	glShader(glShader&& other) noexcept;
+	glShader& operator=(glShader&& other) noexcept;
+
+	inline GLuint id() const { return m_id.value; }
 
 private:
 
-	GLuint m_id{ 0 };
-
+	struct ID {
+		ID(GLenum type) : value{ glCreateShader(type) } {}
+		~ID() { release(); }
+		void release() { glDeleteShader(value); value = 0; }
+		GLuint value{ 0 };
+	} m_id;
 };

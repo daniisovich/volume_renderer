@@ -7,20 +7,26 @@ class glFramebuffer {
 
 public:
 
+	glFramebuffer(const glTexture2D& texture, uint32_t attachment, uint32_t mipmap_level);
+	
+	glFramebuffer() = delete;
 	glFramebuffer(const glFramebuffer&) = delete;
 	glFramebuffer& operator=(const glFramebuffer&) = delete;
+	~glFramebuffer() = default;
 
-	glFramebuffer();
 	glFramebuffer(glFramebuffer&& other) noexcept;
-	~glFramebuffer();
+	glFramebuffer& operator=(glFramebuffer&& other) noexcept;
 
-	inline void bind() const { glBindFramebuffer(GL_FRAMEBUFFER, m_id); }
+	inline void bind() const { glBindFramebuffer(GL_FRAMEBUFFER, m_id.value); }
 	inline void unbind() const { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
-
-	void attach(const glTexture& texture, int attachment, int mipmap_level) const;
 
 private:
 
-	unsigned int m_id;
-
+	struct ID {
+		ID() { glCreateFramebuffers(1, &value); }
+		~ID() { release(); }
+		void release() { glDeleteFramebuffers(1, &value); value = 0; }
+		uint32_t value;
+	} m_id;
+	
 };

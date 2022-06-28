@@ -7,7 +7,7 @@
 
 glWindow::glWindow() : glWindow { 800, 600, "Window" } {}
 
-glWindow::glWindow(int width, int height, const std::string_view name) {
+glWindow::glWindow(uint32_t width, uint32_t height, const std::string_view name) {
 
 	if (!glfwInit())
 		throw std::runtime_error("Failed to initialize GLFW");
@@ -36,16 +36,30 @@ glWindow::glWindow(int width, int height, const std::string_view name) {
 	
 }
 
+glWindow::~glWindow() {
+	release();
+	glfwTerminate();
+}
+
 glWindow::glWindow(glWindow&& other) noexcept : m_window{ other.m_window } {
 	other.m_window = nullptr;
 }
 
-glWindow::~glWindow() {
-	glfwDestroyWindow(m_window);
-	glfwTerminate();
+glWindow& glWindow::operator=(glWindow&& other) noexcept {
+
+	if (this != &other) {
+		release();
+		std::swap(m_window, other.m_window);
+	}
+	return *this;
 }
 
-std::pair<int, int> glWindow::size() const {
+void glWindow::release() {
+	glfwDestroyWindow(m_window);
+	m_window = nullptr;
+}
+
+std::pair<uint32_t, uint32_t> glWindow::size() const {
 
 	int width{ 0 }, height{ 0 };
 	glfwGetWindowSize(m_window, &width, &height);

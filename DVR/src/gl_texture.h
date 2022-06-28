@@ -2,36 +2,39 @@
 
 #include <glad/glad.h>
 
-#include <unordered_map>
+#include <vector>
 
 
-class glTexture {
+class glTexture2D {
 
 public:
+
+	glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type);
+	glTexture2D(GLenum format, GLenum internal_format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const float* border_color = nullptr);
+
+	glTexture2D() = delete;
+	glTexture2D(const glTexture2D&) = delete;
+	glTexture2D& operator=(const glTexture2D&) = delete;
+	~glTexture2D() = default;
 	
-	glTexture() = delete;
-	glTexture(const glTexture&) = delete;
-	glTexture& operator=(const glTexture&) = delete;
-
-	glTexture(GLenum type);
-	glTexture(glTexture&& other) noexcept;
-	~glTexture();
-
-	void attach(GLenum format, GLenum internal_format, uint32_t width, uint32_t height, GLenum data_type) const;
-	void attach(GLenum format, GLenum internal_format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
-					const std::unordered_map<GLenum, GLenum>& texture_params, bool mipmap = false, const float* border_color = nullptr) const;
-
-	inline GLuint id() const { return m_id; }
-	inline GLenum type() const { return m_type; }
+	glTexture2D(glTexture2D&& other) noexcept;
+	glTexture2D& operator=(glTexture2D&& other) noexcept;
 
 	void activate(GLuint texture_unit) const;
 
+	inline GLuint id() const { return m_id.value; }
+
 private:
 
-	inline void bind() const { glBindTexture(m_type, m_id); }
-	inline void unbind() const { glBindTexture(m_type, 0); }
+	inline void bind() const { glBindTexture(GL_TEXTURE_2D, m_id.value); }
+	inline void unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
 
-	GLuint m_id{ 0 };
-	GLenum m_type;
+	struct ID {
+		ID() { glGenTextures(1, &value); }
+		~ID() { release(); }
+		void release() { glDeleteTextures(1, &value); value = 0; }
+		uint32_t value;
+	} m_id;
 
 };
