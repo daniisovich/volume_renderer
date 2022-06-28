@@ -30,12 +30,9 @@ glWindow::glWindow(int width, int height, const std::string_view name) {
 	}
 
 	gl_debug::debug_callback();
-
-	// the glfwWindowHint commands for context version produce error 1282
-	glGetError();
+	setCallbacks();
 
 	glViewport(0, 0, width, height);
-	setCallbacks();
 	
 }
 
@@ -49,7 +46,9 @@ glWindow::~glWindow() {
 }
 
 std::pair<int, int> glWindow::size() const {
+
 	int width{ 0 }, height{ 0 };
 	glfwGetWindowSize(m_window, &width, &height);
 	return { width, height };
+
 }
