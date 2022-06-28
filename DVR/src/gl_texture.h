@@ -9,8 +9,8 @@ class glTexture2D {
 
 public:
 
-	glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type);
-	glTexture2D(GLenum format, GLenum internal_format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+	glTexture2D(GLenum internal_format, uint32_t width, uint32_t height);
+	glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
 		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const float* border_color = nullptr);
 
 	glTexture2D() = delete;
@@ -27,14 +27,11 @@ public:
 
 private:
 
-	inline void bind() const { glBindTexture(GL_TEXTURE_2D, m_id.value); }
-	inline void unbind() const { glBindTexture(GL_TEXTURE_2D, 0); }
-
 	struct ID {
-		ID() { glGenTextures(1, &value); }
+		ID() {glCreateTextures(GL_TEXTURE_2D, 1, &value); }
 		~ID() { release(); }
 		void release() { glDeleteTextures(1, &value); value = 0; }
-		uint32_t value;
+		uint32_t value{ 0 };
 	} m_id;
 
 };

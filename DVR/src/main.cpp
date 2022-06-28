@@ -22,7 +22,7 @@ void renderVolume(const glWindow& window) {
 	UnitCube cube{ vertex_position_loc };
 
 	auto [width, height] = window.size();
-	glTexture2D front_face_tex{ GL_RGBA, width, height, GL_UNSIGNED_BYTE };
+	glTexture2D front_face_tex{ GL_RGBA8, width, height };
 	glFramebuffer front_faces{front_face_tex, 0, 0};
 
 	glm::mat4 model{ glm::mat4(1.0f) };

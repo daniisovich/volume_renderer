@@ -1,34 +1,27 @@
 #include "gl_texture.h"
 
 
-glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type) : m_id{} {
+glTexture2D::glTexture2D(GLenum internal_format, uint32_t width, uint32_t height) : m_id{} {
 
-	bind();
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, data_type, nullptr);
-
-	unbind();
+	glTextureParameteri(m_id.value, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTextureParameteri(m_id.value, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTextureStorage2D(m_id.value, 1, internal_format, width, height);
 
 }
 
-glTexture2D::glTexture2D(GLenum format, GLenum internal_format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
 	const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap, const float* border_color) : m_id{} {
-	
-	bind();
 
 	for (const auto& [key, value] : texture_params) {
-		glTexParameteri(GL_TEXTURE_2D, key, value);
+		glTextureParameteri(m_id.value, key, value);
 	}
 	if (border_color)
-		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border_color);
+		glTextureParameterfv(m_id.value, GL_TEXTURE_BORDER_COLOR, border_color);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, internal_format, width, height, 0, format, data_type, data.data());
+	glTextureSubImage2D(m_id.value, 0, 0, 0, width, height, format, data_type, data.data());
 	if (mipmap)
-		glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(m_id.value);
 
-	unbind();
 }
 
 glTexture2D::glTexture2D(glTexture2D&& other) noexcept : m_id{ other.m_id } {
