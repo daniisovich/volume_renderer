@@ -36,16 +36,16 @@ void renderVolume(const glWindow& window) {
 
 	struct {
 		GLint mvp{ 0 };
-		GLint front_faces{ 1 };
 	} uniform_loc;
+	
+	struct {
+		GLint front_faces{ 0 };
+	}uniform_bindings;
 
-	first_pass.enable();
 	first_pass.setUniform(uniform_loc.mvp, mvp);
 
-	second_pass.enable();
 	second_pass.setUniform(uniform_loc.mvp, mvp);
-	second_pass.setUniform(uniform_loc.front_faces, 0);
-	front_face_tex.activate(0);
+	front_face_tex.activate(uniform_bindings.front_faces);
 
 	cube.bind();
 

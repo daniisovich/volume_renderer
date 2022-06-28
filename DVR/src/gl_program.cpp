@@ -66,9 +66,9 @@ void glProgram::setUniform(const char* name, const glm::mat4& matrix) const {
 }
 
 void glProgram::setUniform(GLint location, GLint value) const {
-	glUniform1i(location, value);
+	glProgramUniform1i(m_id.value, location, value);
 }
 
 void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {
-	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+	glProgramUniformMatrix4fv(m_id.value, location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
