@@ -1,41 +1,60 @@
-#include "gl_window.h"
+#include "window_callbacks.h"
 
 #include <glm/glm.hpp>
 
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+std::shared_ptr<Controller> Controller::m_instance;
 
 
-void glWindow::setCallbacks() const {
-	glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-	glfwSetKeyCallback(m_window, key_callback);
-	glfwSetCursorPosCallback(m_window, cursor_position_callback);
-	glfwSetMouseButtonCallback(m_window, mouse_button_callback);
+void Controller::setCallbacks(GLFWwindow* window) const {
+
+	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) { m_instance->FramebufferSizeCallback(window, width, height); });
+	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) { m_instance->KeyCallback(window, key, scancode, action, mods); });
+	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) { m_instance->CursorPosCallback(window, xpos, ypos); });
+	glfwSetMouseButtonCallback(window, [](GLFWwindow* window, int button, int action, int mods) { m_instance->MouseButtonCallback(window, button, action, mods); });
+
+}
+
+std::shared_ptr<Controller> Controller::create() {
+	struct MakeSharedController : public Controller {};
+	return std::make_shared<MakeSharedController>();
+}
+
+std::shared_ptr<Controller> Controller::instance() {
+
+	if (!m_instance)
+		m_instance = create();
+	return m_instance;
 }
 
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void Controller::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void Controller::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	} else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+		m_rotation_angle = 0;
 	}
 
 }
 
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+void Controller::CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
+	static double previous_xpos{ xpos }, previous_ypos{ ypos };
+	double delta_x = xpos - previous_xpos;
+	double delta_y = ypos - previous_ypos;
 
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+void Controller::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-
+	if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		if (action == GLFW_PRESS) {
+			m_rotate = true;
+		} else if (action == GLFW_RELEASE) {
+			m_rotate = false;
+		}
 	}
 }

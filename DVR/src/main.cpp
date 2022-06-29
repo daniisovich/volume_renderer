@@ -10,10 +10,15 @@
 #include "gl_framebuffer.h"
 #include "gl_texture.h"
 
+#include "camera.h"
+#include "window_callbacks.h"
 #include "unit_cube.h"
 
 
-void renderVolume(const glWindow& window) {
+void renderVolume() {
+
+	auto controller{ Controller::instance() };
+	glWindow window{ controller };
 
 	glProgram first_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/front_face.frag"}});
 	glProgram second_pass(std::vector<ShaderInfo>{{GL_VERTEX_SHADER, "src/shaders/front_face.vert"}, {GL_FRAGMENT_SHADER, "src/shaders/back_face.frag"}});
@@ -24,6 +29,8 @@ void renderVolume(const glWindow& window) {
 	auto [width, height] = window.size();
 	glTexture2D front_face_tex{ GL_RGBA8, width, height };
 	glFramebuffer front_faces{front_face_tex, 0, 0};
+
+	Camera camera({ 0.0f, 0.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
 
 	glm::mat4 model{ glm::mat4(1.0f) };
 	model = glm::rotate(model, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -74,10 +81,7 @@ void renderVolume(const glWindow& window) {
 int main() {
 
 	try {
-
-		glWindow window{};
-		renderVolume(window);
-
+		renderVolume();
 	} catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
 	}	

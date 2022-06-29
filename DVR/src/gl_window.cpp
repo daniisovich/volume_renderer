@@ -3,11 +3,12 @@
 #include <stdexcept>
 
 #include "gl_debug.h"
+#include "window_callbacks.h"
 
 
-glWindow::glWindow() : glWindow { 800, 600, "Window" } {}
+glWindow::glWindow(const std::shared_ptr<Controller> controller) : glWindow { 800, 600, "Window", controller } {}
 
-glWindow::glWindow(uint32_t width, uint32_t height, const std::string_view name) {
+glWindow::glWindow(uint32_t width, uint32_t height, const std::string_view name, const std::shared_ptr<Controller> controller) {
 
 	if (!glfwInit())
 		throw std::runtime_error("Failed to initialize GLFW");
@@ -30,7 +31,7 @@ glWindow::glWindow(uint32_t width, uint32_t height, const std::string_view name)
 	}
 
 	gl_debug::debug_callback();
-	setCallbacks();
+	controller->setCallbacks(m_window);
 
 	glViewport(0, 0, width, height);
 	

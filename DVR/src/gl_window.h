@@ -5,13 +5,15 @@
 
 #include <string>
 
+#include "window_callbacks.h"
+
 
 class glWindow {
 
 public:
 
-	glWindow();
-	glWindow(uint32_t width, uint32_t height, const std::string_view name);
+	glWindow(const std::shared_ptr<Controller> controller);
+	glWindow(uint32_t width, uint32_t height, const std::string_view name, const std::shared_ptr<Controller> controller);
 	~glWindow();
 
 	glWindow(const glWindow&) = delete;
@@ -33,7 +35,6 @@ public:
 private:
 
 	void release();
-	void setCallbacks() const;
 
 	GLFWwindow* m_window;
 
