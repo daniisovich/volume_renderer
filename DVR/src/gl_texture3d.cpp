@@ -1,7 +1,7 @@
-#include "gl_texture.h"
+#include "gl_texture3d.h"
 
 
-glTexture2D::glTexture2D(GLenum internal_format, uint32_t width, uint32_t height) : m_id{} {
+glTexture3D::glTexture3D(GLenum internal_format, uint32_t width, uint32_t height) : m_id{} {
 
 	glTextureParameteri(m_id.value, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(m_id.value, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -9,7 +9,7 @@ glTexture2D::glTexture2D(GLenum internal_format, uint32_t width, uint32_t height
 
 }
 
-glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+glTexture3D::glTexture3D(GLenum format, uint32_t width, uint32_t depth, uint32_t height, GLenum data_type, const std::vector<char>& data,
 	const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap, const float* border_color) : m_id{} {
 
 	for (const auto& [key, value] : texture_params) {
@@ -18,17 +18,17 @@ glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum 
 	if (border_color)
 		glTextureParameterfv(m_id.value, GL_TEXTURE_BORDER_COLOR, border_color);
 
-	glTextureSubImage2D(m_id.value, 0, 0, 0, width, height, format, data_type, data.data());
+	glTextureSubImage3D(m_id.value, 0, 0, 0, 0, width, height, depth, format, data_type, data.data());
 	if (mipmap)
 		glGenerateMipmap(m_id.value);
 
 }
 
-glTexture2D::glTexture2D(glTexture2D&& other) noexcept : m_id{ other.m_id } {
+glTexture3D::glTexture3D(glTexture3D&& other) noexcept : m_id{ other.m_id } {
 	other.m_id.value = 0;
 }
 
-glTexture2D& glTexture2D::operator=(glTexture2D&& other) noexcept {
+glTexture3D& glTexture3D::operator=(glTexture3D&& other) noexcept {
 
 	if (this != &other) {
 		m_id.release();
@@ -38,6 +38,6 @@ glTexture2D& glTexture2D::operator=(glTexture2D&& other) noexcept {
 
 }
 
-void glTexture2D::activate(GLuint texture_unit) const {
+void glTexture3D::activate(GLuint texture_unit) const {
 	glBindTextureUnit(texture_unit, m_id.value);
 }
