@@ -47,6 +47,9 @@ glProgram::glProgram(const std::vector<ShaderInfo>& shader_infos) : m_id{} {
 		glAttachShader(m_id.value, shader.id());
 
 	glLinkProgram(m_id.value);
+	for (const auto& shader : shaders)
+		glDetachShader(m_id.value, shader.id());
+
 	linkStatus(m_id.value);
 
 	retrieveUniforms();
