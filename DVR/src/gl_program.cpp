@@ -10,15 +10,34 @@
 void linkStatus(GLuint program_id);
 
 
+void glProgram::retrieveAttributes() {
+
+	GLint attribute_count{ retrieveValue(GL_ACTIVE_ATTRIBUTES) };
+	if (attribute_count) {
+
+		GLint max_name_len{ retrieveValue(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH) };
+
+		auto attribute_name{ std::make_unique<char[]>(max_name_len) };
+		GLsizei length{ 0 }, count{ 0 };
+		GLenum type{ GL_NONE };
+
+		for (GLint i{ 0 }; i < attribute_count; ++i) {
+			glGetActiveAttrib(m_id.value, i, max_name_len, &length, &count, &type, attribute_name.get());
+			AttributeInfo info{ glGetAttribLocation(m_id.value, attribute_name.get()), count, type };
+
+			m_attributes.emplace(std::string(attribute_name.get(), length), info);
+		}
+
+	}
+
+}
+
 void glProgram::retrieveUniforms() {
 	
-	GLint uniform_count{ 0 };
-	glGetProgramiv(m_id.value, GL_ACTIVE_UNIFORMS, &uniform_count);
-
+	GLint uniform_count{ retrieveValue(GL_ACTIVE_UNIFORMS) };
 	if (uniform_count) {
 		
-		GLint max_name_len{ 0 };
-		glGetProgramiv(m_id.value, GL_ACTIVE_UNIFORM_MAX_LENGTH, &max_name_len);
+		GLint max_name_len{ retrieveValue(GL_ACTIVE_UNIFORM_MAX_LENGTH) };
 
 		auto uniform_name{ std::make_unique<char[]>(max_name_len) };
 		GLsizei length{ 0 }, count{ 0 };
@@ -33,6 +52,12 @@ void glProgram::retrieveUniforms() {
 
 	}
 
+}
+
+GLint glProgram::retrieveValue(GLenum type) const {
+	GLint value;
+	glGetProgramiv(m_id.value, type, &value);
+	return value;
 }
 
 glProgram::glProgram(const std::vector<ShaderInfo>& shader_infos) : m_id{} {
@@ -52,6 +77,7 @@ glProgram::glProgram(const std::vector<ShaderInfo>& shader_infos) : m_id{} {
 
 	linkStatus(m_id.value);
 
+	retrieveAttributes();
 	retrieveUniforms();
 
 }

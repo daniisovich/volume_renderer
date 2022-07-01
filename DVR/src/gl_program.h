@@ -10,6 +10,13 @@
 #include "gl_shader.h"
 
 
+// will maybe change in the future
+struct AttributeInfo {
+	GLint location;
+	GLsizei count;
+	GLenum type;
+};
+
 struct UniformInfo {
 	GLint location;
 	GLsizei count;
@@ -41,11 +48,13 @@ public:
 	void setUniform(GLint location, GLint value) const;
 	void setUniform(GLint location, const glm::mat4& matrix) const;
 
-	inline GLint attributeLocation(const std::string& name) const { return glGetAttribLocation(m_id.value, name.c_str()); }
+	inline GLint attributeLocation(const std::string& name) { return m_attributes[name].location; }
 
 private:
 
+	void retrieveAttributes();
 	void retrieveUniforms();
+	GLint retrieveValue(GLenum type) const;
 
 	struct ID {
 		ID() : value{ glCreateProgram() } {}
@@ -54,6 +63,7 @@ private:
 		GLuint value{ 0 };
 	} m_id;
 
+	std::unordered_map<std::string, AttributeInfo> m_attributes{};
 	std::unordered_map<std::string, UniformInfo> m_uniforms{};
 
 };
