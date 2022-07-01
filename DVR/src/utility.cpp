@@ -22,6 +22,7 @@ namespace utility {
 
 		VolumeInfo volume_info{ parseMetadata(path) };
 
+		return glTexture3D{ volume_info.format, volume_info.size };
 	}
 	
 

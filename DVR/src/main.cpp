@@ -41,9 +41,9 @@ void renderVolume() {
 
 	front_face_tex.activate(uniform_bindings.front_faces);
 
-	const std::string_view volume_path{ "data/bonsai.dat" };
-	glTexture3D volume_tex{ utility::loadVolume(volume_path) };
-	volume_tex.activate(uniform_bindings.volume);
+	//const std::string_view volume_path{ "data/bonsai.dat" };
+	//glTexture3D volume_tex{ utility::loadVolume(volume_path) };
+	//volume_tex.activate(uniform_bindings.volume);
 
 	cube.bind();
 
