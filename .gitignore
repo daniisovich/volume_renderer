@@ -6,4 +6,5 @@ DVR/vendor/
 
 # files
 *.user
+*.dat
 *.raw
