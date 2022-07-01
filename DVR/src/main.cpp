@@ -8,11 +8,12 @@
 #include "gl_window.h"
 #include "gl_program.h"
 #include "gl_framebuffer.h"
-#include "gl_texture.h"
+#include "gl_texture2d.h"
 
 #include "camera.h"
 #include "window_callbacks.h"
 #include "unit_cube.h"
+#include "utility.h"
 
 
 void renderVolume() {
@@ -30,25 +31,19 @@ void renderVolume() {
 	glTexture2D front_face_tex{ GL_RGBA8, width, height };
 	glFramebuffer front_faces{front_face_tex, 0, 0};
 
-	Camera camera({ 0.0f, 0.0f, 3.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
+	auto camera = std::make_shared<Camera>(Camera({ 0.0f, 0.0f, 3.0f }, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 45.0f, 800, 600));
+	controller->attachCamera(camera);
 
-	glm::mat4 model{ glm::mat4(1.0f) };
-	model = glm::rotate(model, glm::radians(20.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
-	glm::mat4 view{ glm::lookAt(glm::vec3{0.0f, 0.0f, 3.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) };
-	glm::mat4 proj{ glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f) };
-
-	glm::mat4 mvp = proj * view * model;
-	
 	struct {
-		GLint front_faces{ 0 };
-	}uniform_bindings;
+		GLuint front_faces{ 0 };
+		GLuint volume{ 1 };
+	} uniform_bindings;
 
-	first_pass.setUniform("mvp", mvp);
-
-	second_pass.setUniform("mvp", mvp);
 	front_face_tex.activate(uniform_bindings.front_faces);
+
+	const std::string_view volume_path{ "data/bonsai.dat" };
+	glTexture3D volume_tex{ utility::loadVolume(volume_path) };
+	volume_tex.activate(uniform_bindings.volume);
 
 	cube.bind();
 
@@ -57,10 +52,13 @@ void renderVolume() {
 
 	while (!window.shouldClose()) {
 
+		glm::mat4 mvp = camera->mvp();
+
 		front_faces.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
 		glCullFace(GL_FRONT);
 
+		first_pass.setUniform("mvp", mvp);
 		first_pass.enable();
 		cube.draw();
 
@@ -68,6 +66,7 @@ void renderVolume() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glCullFace(GL_BACK);
 
+		second_pass.setUniform("mvp", mvp);
 		second_pass.enable();
 		cube.draw();
 

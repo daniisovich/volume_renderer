@@ -1,6 +1,8 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <memory>
 
@@ -15,19 +17,22 @@ public:
 	static std::shared_ptr<Controller> instance();
 
 	void setCallbacks(GLFWwindow* window) const;
+	void attachCamera(const std::shared_ptr<Camera>& camera);
+
+private:
+
+	Controller() {};
 
 	void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	void CursorPosCallback(GLFWwindow* window, double xpos, double ypos);
 	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 
-private:
-
-	Controller() {};
-
-	bool m_rotate{ false };
-	double m_rotation_angle{ 0 };
 
 	static std::shared_ptr<Controller> m_instance;
+	std::shared_ptr<Camera> m_camera;
+
+	bool m_rotate{ false };
+	const float m_rotation_speed{ 0.1f };
 
 };

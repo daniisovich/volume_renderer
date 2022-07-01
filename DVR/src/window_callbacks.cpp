@@ -14,6 +14,10 @@ void Controller::setCallbacks(GLFWwindow* window) const {
 
 }
 
+void Controller::attachCamera(const std::shared_ptr<Camera>& camera) {
+	m_camera = camera;
+}
+
 std::shared_ptr<Controller> Controller::create() {
 	struct MakeSharedController : public Controller {};
 	return std::make_shared<MakeSharedController>();
@@ -36,15 +40,29 @@ void Controller::KeyCallback(GLFWwindow* window, int key, int scancode, int acti
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	} else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-		m_rotation_angle = 0;
+		m_camera->resetRotation();
 	}
 
 }
 
 void Controller::CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
+	
 	static double previous_xpos{ xpos }, previous_ypos{ ypos };
-	double delta_x = xpos - previous_xpos;
-	double delta_y = ypos - previous_ypos;
+	
+	if (m_rotate) {
+
+		double delta_x = xpos - previous_xpos;
+		double delta_y = ypos - previous_ypos;
+
+		float theta = m_rotation_speed * float(delta_x);
+		float phi = m_rotation_speed * float(delta_y);
+
+		m_camera->addRotation({ theta, phi });
+
+	}
+
+	previous_xpos = xpos;
+	previous_ypos = ypos;
 
 }
 
