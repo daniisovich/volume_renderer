@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gl_texture.h"
+#include "gl_texture2d.h"
 
 
 class glFramebuffer {
