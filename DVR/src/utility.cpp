@@ -21,6 +21,7 @@ namespace utility {
 	glTexture3D loadVolume(const std::string_view path) {
 
 		VolumeInfo volume_info{ parseMetadata(path) };
+
 	}
 	
 
