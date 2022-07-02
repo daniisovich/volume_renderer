@@ -118,12 +118,20 @@ void glProgram::setUniform(const char* name, GLint value) {
 	setUniform(m_uniforms[name].location, value);
 }
 
+void glProgram::setUniform(const char* name, GLfloat value) {
+	setUniform(m_uniforms[name].location, value);
+}
+
 void glProgram::setUniform(const char* name, const glm::mat4& matrix) {
 	setUniform(m_uniforms[name].location, matrix);
 }
 
 void glProgram::setUniform(GLint location, GLint value) const {
 	glProgramUniform1i(m_id.value, location, value);
+}
+
+void glProgram::setUniform(GLint location, GLfloat value) const {
+	glProgramUniform1f(m_id.value, location, value);
 }
 
 void glProgram::setUniform(GLint location, const glm::mat4& matrix) const {

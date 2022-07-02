@@ -43,9 +43,11 @@ public:
 	inline void validate() const { glValidateProgram(m_id.value); }
 
 	void setUniform(const char* name, GLint value);
+	void setUniform(const char* name, GLfloat value);
 	void setUniform(const char* name, const glm::mat4& matrix);
 
 	void setUniform(GLint location, GLint value) const;
+	void setUniform(GLint location, GLfloat value) const;
 	void setUniform(GLint location, const glm::mat4& matrix) const;
 
 	inline GLint attributeLocation(const std::string& name) { return m_attributes[name].location; }
