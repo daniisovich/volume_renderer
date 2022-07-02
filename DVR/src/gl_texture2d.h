@@ -12,7 +12,7 @@ public:
 
 	glTexture2D(GLenum internal_format, const std::array<uint32_t, 2>& size);
 	glTexture2D(GLenum format, GLenum internal_format, const std::array<uint32_t, 2>& size, GLenum data_type, const std::vector<uint8_t>& data,
-		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const float* border_color = nullptr);
+		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const std::array<float, 4>& border_color = { 0.0f, 0.0f, 0.0f, 0.0f });
 
 	glTexture2D() = delete;
 	glTexture2D(const glTexture2D&) = delete;

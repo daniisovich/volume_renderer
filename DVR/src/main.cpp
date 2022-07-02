@@ -34,7 +34,7 @@ void renderVolume() {
 	auto camera = std::make_shared<Camera>(Camera({ 0.0f, 0.0f, 3.0f }, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 45.0f, 800, 600));
 	controller->attachCamera(camera);
 
-	const GLfloat num_samples{ 128 };
+	const GLfloat num_samples{ 32 };
 	const GLfloat smooth_step_start{ 0.12f };
 	const GLfloat smooth_step_end{ 0.22f };
 
