@@ -4,25 +4,44 @@
 #include <sstream>
 #include <array>
 #include <algorithm>
-#include <iostream>
+#include <iterator>
+
 
 struct VolumeInfo {
 	std::string filename{ "" };
 	std::array<uint32_t, 3> size;
 	GLenum type{ 0 };
 	GLenum format{ 0 };
+	GLenum internal_format{ 0 };
 };
 
+
 VolumeInfo parseMetadata(const std::string_view path);
+void getInternalFormat(VolumeInfo& info);
 void parseLine(const std::string& line, VolumeInfo& info);
+std::vector<uint8_t> loadVolumeData(std::string_view path);
+
 
 namespace utility {
 
 	glTexture3D loadVolume(const std::string_view path) {
 
 		VolumeInfo volume_info{ parseMetadata(path) };
+		getInternalFormat(volume_info);
 
-		return glTexture3D{ volume_info.format, volume_info.size };
+		const std::string base_path{ path.substr(0, path.find_last_of("/") + 1) };
+		std::vector<uint8_t> volume{ loadVolumeData(base_path + volume_info.filename) };
+
+		const std::vector<std::pair<GLenum, GLenum>> texture_params{
+			{ GL_TEXTURE_MIN_FILTER, GL_LINEAR },
+			{ GL_TEXTURE_MAG_FILTER, GL_LINEAR },
+		};
+
+		if (volume.size() != volume_info.size[0] * volume_info.size[1] * volume_info.size[2])
+			throw std::runtime_error("Data of volume does not match with dimensions");
+
+		return std::move(glTexture3D(volume_info.format, volume_info.internal_format, volume_info.size, volume_info.type, volume, texture_params));
+
 	}
 	
 
@@ -30,11 +49,12 @@ namespace utility {
 
 VolumeInfo parseMetadata(const std::string_view path) {
 
-	std::ifstream file{ path.data(), std::ios::binary };
+	std::ifstream file{ path.data() };
 	if (!file)
 		throw std::runtime_error("Failed to open file " + std::string(path));
 
 	VolumeInfo volume_info;
+	volume_info.format = GL_RED;
 
 	for (std::string line; std::getline(file, line);) {
 		parseLine(line, volume_info);
@@ -42,6 +62,18 @@ VolumeInfo parseMetadata(const std::string_view path) {
 
 	return volume_info;
 
+}
+
+void getInternalFormat(VolumeInfo& info) {
+
+	if (info.type == GL_UNSIGNED_BYTE) {
+		if (info.format == GL_RED) {
+			info.internal_format = GL_R8;
+		}
+		else if (info.format == GL_RGBA) {
+			info.internal_format = GL_RGBA8;
+		}
+	}
 }
 
 void parseLine(const std::string& line, VolumeInfo& info) {
@@ -53,10 +85,12 @@ void parseLine(const std::string& line, VolumeInfo& info) {
 
 	value.erase(std::remove(value.begin(), value.end(), '\t'), value.end());
 	value.erase(std::remove(value.begin(), value.end(), '\r'), value.end());
+	value.erase(std::remove(value.begin(), value.end(), '\n'), value.end());
 
 	if (key == "ObjectFileName") {
 		info.filename = value;
-	} else if (key == "Resolution") {
+	} 
+	else if (key == "Resolution") {
 		std::stringstream value_stream{ value };
 		for (int i{ 0 }; i < 3; ++i) {
 			std::string part;
@@ -68,9 +102,15 @@ void parseLine(const std::string& line, VolumeInfo& info) {
 		if (value == "UCHAR")
 			info.type = GL_UNSIGNED_BYTE;
 	}
-	else if (key == "ObjectModel") {
-		if (value == "RGBA")
-			info.format = GL_RGBA;
-	}
+
+}
+
+std::vector<uint8_t> loadVolumeData(std::string_view path) {
+
+	std::ifstream file{ path.data(), std::ios::binary};
+	if (!file)
+		throw std::runtime_error("Failed to open file " + std::string(path));
+
+	return std::vector<uint8_t>(std::istreambuf_iterator<char>(file), {});
 
 }
