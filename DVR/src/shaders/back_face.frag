@@ -26,7 +26,7 @@ void main() {
 	while(inVolume(volume_position)) {
 
 		float volume_value = texture(volume, volume_position).r;
-		vec4 volume_color = vec4(smoothstep(volume_value, smooth_step_start, smooth_step_end));
+		vec4 volume_color = vec4(smoothstep(smooth_step_start, smooth_step_end, volume_value));
 
 		color.rgb = color.rgb + (1.0f - color.a) * volume_color.a * volume_color.rgb;
 		color.a   = color.a   + (1.0f - color.a) * volume_color.a;
