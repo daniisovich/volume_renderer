@@ -35,6 +35,9 @@ namespace utility {
 		const std::vector<std::pair<GLenum, GLenum>> texture_params{
 			{ GL_TEXTURE_MIN_FILTER, GL_LINEAR },
 			{ GL_TEXTURE_MAG_FILTER, GL_LINEAR },
+			{ GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER },
+			{ GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER },
+			{ GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER },
 		};
 
 		if (volume.size() != volume_info.size[0] * volume_info.size[1] * volume_info.size[2])
