@@ -31,7 +31,7 @@ glm::mat4 Camera::mvp() {
 
 	static Rotation previous_rotation{ 0.0, 0.0 };
 	
-	if (previous_rotation.phi != m_rotation.phi &&  previous_rotation.theta != m_rotation.theta) {
+	if (previous_rotation.phi != m_rotation.phi || previous_rotation.theta != m_rotation.theta) {
 		updateRotationMatrix();
 		previous_rotation = m_rotation;
 	}
