@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 
+#include <array>
 #include <vector>
 
 
@@ -9,8 +10,8 @@ class glTexture2D {
 
 public:
 
-	glTexture2D(GLenum internal_format, uint32_t width, uint32_t height);
-	glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+	glTexture2D(GLenum internal_format, const std::array<uint32_t, 2>& size);
+	glTexture2D(GLenum format, GLenum internal_format, const std::array<uint32_t, 2>& size, GLenum data_type, const std::vector<uint8_t>& data,
 		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const float* border_color = nullptr);
 
 	glTexture2D() = delete;

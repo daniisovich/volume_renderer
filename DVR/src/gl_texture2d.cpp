@@ -1,15 +1,15 @@
 #include "gl_texture2d.h"
 
 
-glTexture2D::glTexture2D(GLenum internal_format, uint32_t width, uint32_t height) : m_id{} {
+glTexture2D::glTexture2D(GLenum internal_format, const std::array<uint32_t, 2>& size) : m_id{} {
 
 	glTextureParameteri(m_id.value, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(m_id.value, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTextureStorage2D(m_id.value, 1, internal_format, width, height);
+	glTextureStorage2D(m_id.value, 1, internal_format, size[0], size[1]);
 
 }
 
-glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum data_type, const std::vector<char>& data,
+glTexture2D::glTexture2D(GLenum format, GLenum internal_format, const std::array<uint32_t, 2>& size, GLenum data_type, const std::vector<uint8_t>& data,
 	const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap, const float* border_color) : m_id{} {
 
 	for (const auto& [key, value] : texture_params) {
@@ -18,7 +18,8 @@ glTexture2D::glTexture2D(GLenum format, uint32_t width, uint32_t height, GLenum 
 	if (border_color)
 		glTextureParameterfv(m_id.value, GL_TEXTURE_BORDER_COLOR, border_color);
 
-	glTextureSubImage2D(m_id.value, 0, 0, 0, width, height, format, data_type, data.data());
+	glTextureStorage2D(m_id.value, 1, internal_format, size[0], size[1]);
+	glTextureSubImage2D(m_id.value, 0, 0, 0, size[0], size[1], format, data_type, data.data());
 	if (mipmap)
 		glGenerateMipmap(m_id.value);
 

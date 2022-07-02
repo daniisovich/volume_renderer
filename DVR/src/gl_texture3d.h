@@ -11,7 +11,7 @@ class glTexture3D {
 public:
 
 	glTexture3D(GLenum internal_format, const std::array<uint32_t, 3>& size);
-	glTexture3D(GLenum format, const std::array<uint32_t, 3>& size, GLenum data_type, const std::vector<char>& data,
+	glTexture3D(GLenum format, GLenum internal_format, const std::array<uint32_t, 3>& size, GLenum data_type, const std::vector<uint8_t>& data,
 		const std::vector<std::pair<GLenum, GLenum>>& texture_params, bool mipmap = false, const float* border_color = nullptr);
 
 	glTexture3D() = delete;
