@@ -28,11 +28,19 @@ void renderVolume() {
 	UnitCube cube{ vertex_position_loc };
 
 	auto [width, height] = window.size();
-	glTexture2D front_face_tex{ GL_RGBA8, width, height };
+	glTexture2D front_face_tex{ GL_RGBA8, {width, height} };
 	glFramebuffer front_faces{front_face_tex, 0, 0};
 
 	auto camera = std::make_shared<Camera>(Camera({ 0.0f, 0.0f, 3.0f }, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 45.0f, 800, 600));
 	controller->attachCamera(camera);
+
+	const GLint num_samples{ 128 };
+	const GLfloat smooth_step_start{ 0.12f };
+	const GLfloat smooth_step_end{ 0.22f };
+
+	second_pass.setUniform("num_samples", num_samples);
+	second_pass.setUniform("smooth_step_start", smooth_step_start);
+	second_pass.setUniform("smooth_step_end", smooth_step_end);
 
 	struct {
 		GLuint front_faces{ 0 };
@@ -41,9 +49,9 @@ void renderVolume() {
 
 	front_face_tex.activate(uniform_bindings.front_faces);
 
-	//const std::string_view volume_path{ "data/bonsai.dat" };
-	//glTexture3D volume_tex{ utility::loadVolume(volume_path) };
-	//volume_tex.activate(uniform_bindings.volume);
+	const std::string_view volume_path{ "data/bonsai.dat" };
+	glTexture3D volume_tex{ utility::loadVolume(volume_path) };
+	volume_tex.activate(uniform_bindings.volume);
 
 	cube.bind();
 

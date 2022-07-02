@@ -3,13 +3,38 @@
 in vec3 frag_position;
 out vec4 color;
 
+uniform int num_samples;
+uniform float smooth_step_start;
+uniform float smooth_step_end;
+
 layout (binding = 0) uniform sampler2D front_faces;
 layout (binding = 1) uniform sampler3D volume;
-layout (binding = 2) uniform sampler1D transfer_function;
 
+
+bool inVolume(vec3 volume_position) {
+	return volume_position.x >= 0.0f && volume_position.x <= 1.0f &&
+		   volume_position.y >= 0.0f && volume_position.y <= 1.0f &&
+		   volume_position.z >= 0.0f && volume_position.z <= 1.0f;
+}
 
 void main() {
-	vec3 front_face = texelFetch(front_faces, ivec2(gl_FragCoord), 0).xyz;
-	vec3 direction = frag_position - front_face;
-	color = vec4(-direction, 1.0);
+
+	vec3 volume_position = texelFetch(front_faces, ivec2(gl_FragCoord), 0).xyz;
+	vec3 step = (frag_position - volume_position) / float(num_samples);
+	
+	color = vec4(0.0f);
+	while(inVolume(volume_position)) {
+
+		float volume_value = texture(volume, volume_position).r;
+		vec4 volume_color = vec4(smoothstep(volume_value, smooth_step_start, smooth_step_end));
+
+		color.rgb = color.rgb + (1.0f - color.a) * volume_color.a * volume_color.rgb;
+		color.a   = color.a   + (1.0f - color.a) * volume_color.a;
+
+		if (color.a > 0.95)
+			break;
+
+		volume_position += step;
+	}
+
 }
