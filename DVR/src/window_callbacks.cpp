@@ -24,7 +24,6 @@ std::shared_ptr<Controller> Controller::create() {
 }
 
 std::shared_ptr<Controller> Controller::instance() {
-
 	if (!m_instance)
 		m_instance = create();
 	return m_instance;
@@ -63,7 +62,7 @@ void Controller::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 
 	previous_xpos = xpos;
 	previous_ypos = ypos;
-
+	
 }
 
 void Controller::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
