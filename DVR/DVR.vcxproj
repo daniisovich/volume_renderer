@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\gl_framebuffer.cpp" />
     <ClCompile Include="src\gl_program.cpp" />
@@ -171,10 +172,12 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\unit_cube.cpp" />
     <ClCompile Include="src\utility.cpp" />
-    <ClCompile Include="src\window_callbacks.cpp" />
+    <ClCompile Include="src\volume_renderer.cpp" />
+    <ClCompile Include="src\controller.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\gl_framebuffer.h" />
     <ClInclude Include="src\gl_texture2d.h" />
@@ -187,12 +190,13 @@
     <ClInclude Include="src\gl_window.h" />
     <ClInclude Include="src\gl_program.h" />
     <ClInclude Include="src\utility.h" />
-    <ClInclude Include="src\window_callbacks.h" />
+    <ClInclude Include="src\volume_renderer.h" />
+    <ClInclude Include="src\controller.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\back_face.frag" />
     <None Include="src\shaders\front_face.frag" />
-    <None Include="src\shaders\front_face.vert" />
+    <None Include="src\shaders\pass.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

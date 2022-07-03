@@ -45,7 +45,7 @@
     <ClCompile Include="src\gl_texture2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\window_callbacks.cpp">
+    <ClCompile Include="src\controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\camera.cpp">
@@ -55,6 +55,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\volume_renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +92,7 @@
     <ClInclude Include="src\gl_texture2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\window_callbacks.h">
+    <ClInclude Include="src\controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\camera.h">
@@ -98,9 +104,15 @@
     <ClInclude Include="src\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\volume_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\front_face.vert" />
+    <None Include="src\shaders\pass.vert" />
     <None Include="src\shaders\front_face.frag" />
     <None Include="src\shaders\back_face.frag" />
   </ItemGroup>
