@@ -24,6 +24,8 @@ public:
 
 	void activate(GLuint texture_unit) const;
 
+	void changeSize(uint32_t width, uint32_t height);
+
 	inline GLuint id() const { return m_id.value; }
 
 private:

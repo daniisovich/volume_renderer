@@ -7,7 +7,7 @@ class glFramebuffer {
 
 public:
 
-	glFramebuffer(const glTexture2D& texture, uint32_t attachment, uint32_t mipmap_level);
+	glFramebuffer(GLenum format, const std::array<uint32_t, 2>& size, uint32_t attachment, uint32_t mipmap_level);
 	
 	glFramebuffer() = delete;
 	glFramebuffer(const glFramebuffer&) = delete;
@@ -17,6 +17,7 @@ public:
 	glFramebuffer(glFramebuffer&& other) noexcept;
 	glFramebuffer& operator=(glFramebuffer&& other) noexcept;
 
+	inline void activateTexture(GLuint texture_unit) const { m_attachment.activate(texture_unit); }
 	inline void bind() const { glBindFramebuffer(GL_FRAMEBUFFER, m_id.value); }
 	inline void unbind() const { glBindFramebuffer(GL_FRAMEBUFFER, 0); }
 
@@ -29,4 +30,6 @@ private:
 		uint32_t value;
 	} m_id;
 	
+	glTexture2D m_attachment;
+
 };
