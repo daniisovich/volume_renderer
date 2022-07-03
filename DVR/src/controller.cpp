@@ -6,7 +6,7 @@
 
 
 void Controller::setRotationSpeed(double frametime) {
-	m_rotation_speed = 50 * frametime;
+	m_rotation_speed = 50.0 * frametime;
 }
 
 void Controller::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
@@ -50,7 +50,7 @@ void Controller::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 	if (m_left_click) {
 
 		const std::array<double, 2> delta{ xpos - previous_pos[0], ypos - previous_pos[1] };
-		const Rotation rotation{ m_rotation_speed * float(delta[0]), m_rotation_speed * float(delta[1]) };
+		const Rotation rotation{ float(m_rotation_speed * delta[0]), float(m_rotation_speed * delta[1]) };
 		
 		if (m_renderer) {
 			m_renderer->addRotation(rotation);

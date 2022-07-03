@@ -38,6 +38,6 @@ private:
 	bool m_left_click{ false }, m_right_click{ false };
 	bool m_show_framerate{ false };
 
-	float m_rotation_speed{ 0.1f };
+	double m_rotation_speed{ 0.1 };
 
 };
