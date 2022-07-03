@@ -2,7 +2,14 @@
 
 #include <vector>
 
+#include <glm/glm.hpp>
 #include "gl_vao.h"
+
+
+struct Rotation {
+	float theta;
+	float phi;
+};
 
 
 class UnitCube {
@@ -11,15 +18,24 @@ public:
 
 	UnitCube(int32_t position_location = 0);
 
+	glm::mat4 modelMatrix();
+	void resetRotation() { m_rotation = { 0.0f, 0.0f }; }
+	void addRotation(const Rotation& rotation);
+
 	inline void bind() const { m_vao.bind(); }
 	inline void unbind() const { m_vao.unbind(); }
 
-	inline void draw() const { glDrawElements(GL_TRIANGLES, GLsizei(m_indices.size()), GL_UNSIGNED_INT, 0); }
+	inline GLsizei indexCount() const { return GLsizei(m_indices.size()); }
+	//inline void draw() const { glDrawElements(GL_TRIANGLES, GLsizei(m_indices.size()), GL_UNSIGNED_INT, 0); }
 
 private:
 
-	glVao m_vao;
+	void updateRotationMatrix();
 
+	glVao m_vao;
+	
+	Rotation m_rotation{ 0.0f, 0.0f };
+	glm::mat4 m_model_matrix{ 1.0f };
 	
 	const std::vector<float> m_vertices{
 		-0.5f,  0.5f,  0.5f,
