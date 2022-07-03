@@ -13,7 +13,11 @@ void Application::run() {
 	glEnable(GL_CULL_FACE);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+	double frametime{ 0.0 };
 	while (!m_window.shouldClose()) {
+
+		frametime = this->frametime();
+		m_controller.setRotationSpeed(frametime);
 
 		m_volume_renderer->render();
 

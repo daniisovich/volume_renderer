@@ -5,6 +5,10 @@
 #include <glm/glm.hpp>
 
 
+void Controller::setRotationSpeed(double frametime) {
+	m_rotation_speed = 50 * frametime;
+}
+
 void Controller::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 	
 	if (m_renderer) {

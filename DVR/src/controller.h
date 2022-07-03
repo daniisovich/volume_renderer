@@ -21,8 +21,9 @@ public:
 
 	void setCallbacks(GLFWwindow* window) const;
 
-	inline bool showFramerate() const { return m_show_framerate; }
+	void setRotationSpeed(double frametime);
 
+	inline bool showFramerate() const { return m_show_framerate; }
 	inline void attachRenderer(const std::shared_ptr<VolumeRenderer> renderer) { m_renderer = renderer; }
 
 private:
@@ -37,6 +38,6 @@ private:
 	bool m_left_click{ false }, m_right_click{ false };
 	bool m_show_framerate{ false };
 
-	const float m_rotation_speed{ 0.1f };
+	float m_rotation_speed{ 0.1f };
 
 };
