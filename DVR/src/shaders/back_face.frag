@@ -20,8 +20,8 @@ bool inVolume(vec3 volume_position) {
 void main() {
 
 	vec3 volume_position = texelFetch(front_faces, ivec2(gl_FragCoord), 0).xyz;
-	vec3 step = (frag_position - volume_position) / num_samples;
-	
+	vec3 step = normalize(frag_position - volume_position) / num_samples;
+
 	color = vec4(0.0f);
 	while(inVolume(volume_position)) {
 
