@@ -17,7 +17,7 @@ public:
 	VolumeRenderer() = delete;
 	VolumeRenderer(const std::array<uint32_t, 2>& viewport_size);
 
-	void render();
+	void render(float smooth_step_start, float smooth_step_end);
 
 	void setCameraProjection(uint32_t width, uint32_t height) { m_camera.setProjection(width, height); }
 	void setFramebuffer(glFramebuffer& framebuffer) { m_front_faces = std::move(framebuffer); }
@@ -35,8 +35,6 @@ private:
 	Camera m_camera;
 
 	const GLfloat num_samples{ 32 };
-	const GLfloat smooth_step_start{ 0.12f };
-	const GLfloat smooth_step_end{ 0.22f };
 
 	const struct {
 		GLuint front_faces{ 0 };

@@ -3,10 +3,10 @@
 #include <array>
 
 #include <glm/glm.hpp>
-
+#include <iostream>
 
 void Controller::setRotationSpeed(double frametime) {
-	m_rotation_speed = 50.0 * frametime;
+	m_speed = 50.0 * frametime;
 }
 
 void Controller::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
@@ -29,7 +29,7 @@ void Controller::KeyCallback(GLFWwindow* window, int key, int scancode, int acti
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	} 
-	else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+	if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 		if (m_renderer) {
 			m_renderer->resetRotation();
 		}
@@ -37,9 +37,34 @@ void Controller::KeyCallback(GLFWwindow* window, int key, int scancode, int acti
 			printf("Callback::Warning::No renderer attached");
 		}
 	}
-	else if (key == GLFW_KEY_I && action == GLFW_PRESS) {
-		m_show_framerate = !m_show_framerate;
+	if (key == GLFW_KEY_UP && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+		addSmoothStepEnd(m_speed * m_smooth_step_factor);
 	}
+	if (key == GLFW_KEY_DOWN && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+		addSmoothStepEnd(-m_speed * m_smooth_step_factor);
+	}
+	if (key == GLFW_KEY_RIGHT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+		addSmoothStepStart(m_speed * m_smooth_step_factor);
+	}
+	if (key == GLFW_KEY_LEFT && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+		addSmoothStepStart(-m_speed * m_smooth_step_factor);
+	}
+
+}
+
+void Controller::addSmoothStepStart(float delta) {
+
+	m_smooth_step_parameter.start += delta;
+	m_smooth_step_parameter.start = (m_smooth_step_parameter.start >= 0.0f) ? m_smooth_step_parameter.start : 0.0f;
+	m_smooth_step_parameter.start = (m_smooth_step_parameter.start <= m_smooth_step_parameter.end) ? m_smooth_step_parameter.start : m_smooth_step_parameter.end;
+
+}
+
+void Controller::addSmoothStepEnd(float delta) {
+
+	m_smooth_step_parameter.end += delta;
+	m_smooth_step_parameter.end = (m_smooth_step_parameter.end <= 1.0f) ? m_smooth_step_parameter.end : 1.0f;
+	m_smooth_step_parameter.end = (m_smooth_step_parameter.start <= m_smooth_step_parameter.end) ? m_smooth_step_parameter.end : m_smooth_step_parameter.start;
 
 }
 
@@ -50,7 +75,7 @@ void Controller::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 	if (m_left_click) {
 
 		const std::array<double, 2> delta{ xpos - previous_pos[0], ypos - previous_pos[1] };
-		const Rotation rotation{ float(m_rotation_speed * delta[0]), float(m_rotation_speed * delta[1]) };
+		const Rotation rotation{ float(m_speed * delta[0]), float(m_speed * delta[1]) };
 		
 		if (m_renderer) {
 			m_renderer->addRotation(rotation);
@@ -69,9 +94,6 @@ void Controller::MouseButtonCallback(GLFWwindow* window, int button, int action,
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {
 		m_left_click = (action == GLFW_PRESS);
-	}
-	else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-		m_right_click = (action == GLFW_PRESS);
 	}
 
 }

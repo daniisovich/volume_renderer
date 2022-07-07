@@ -18,12 +18,8 @@ void Application::run() {
 
 		frametime = this->frametime();
 		m_controller.setRotationSpeed(frametime);
-
-		m_volume_renderer->render();
-
-		if (m_controller.showFramerate()) {
-
-		}
+		auto [smooth_step_start, smooth_step_end] = m_controller.smoothStepParameter();
+		m_volume_renderer->render(smooth_step_start, smooth_step_end);
 
 		m_window.swapAndPoll();
 

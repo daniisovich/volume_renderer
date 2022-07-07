@@ -12,16 +12,13 @@ VolumeRenderer::VolumeRenderer(const std::array<uint32_t, 2>& viewport_size) :
 {
 
 	m_second_pass.setUniform("num_samples", num_samples);
-	m_second_pass.setUniform("smooth_step_start", smooth_step_start);
-	m_second_pass.setUniform("smooth_step_end", smooth_step_end);
-
 	m_volume_tex.activate(uniform_bindings.volume);
 
 	m_cube.bind();
 
 }
 
-void VolumeRenderer::render() {
+void VolumeRenderer::render(float smooth_step_start, float smooth_step_end) {
 
 	glm::mat4 mvp = m_camera.vp() * m_cube.modelMatrix();
 
@@ -38,7 +35,10 @@ void VolumeRenderer::render() {
 	glCullFace(GL_BACK);
 
 	m_second_pass.setUniform("mvp", mvp);
+	m_second_pass.setUniform("smooth_step_start", smooth_step_start);
+	m_second_pass.setUniform("smooth_step_end", smooth_step_end);
 	m_front_faces.activateTexture(uniform_bindings.front_faces);
+
 	m_second_pass.enable();
 	glDrawElements(GL_TRIANGLES, m_cube.indexCount(), GL_UNSIGNED_INT, 0);
 
