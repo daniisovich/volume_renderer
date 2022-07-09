@@ -159,44 +159,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\camera.cpp" />
-    <ClCompile Include="src\gl_framebuffer.cpp" />
-    <ClCompile Include="src\gl_program.cpp" />
-    <ClCompile Include="src\gl_shader.cpp" />
-    <ClCompile Include="src\gl_texture2d.cpp" />
-    <ClCompile Include="src\gl_texture3d.cpp" />
-    <ClCompile Include="src\gl_vao.cpp" />
-    <ClCompile Include="src\gl_vbo.cpp" />
-    <ClCompile Include="src\gl_window.cpp" />
+    <ClCompile Include="src\dvr\application.cpp" />
+    <ClCompile Include="src\dvr\camera\camera.cpp" />
+    <ClCompile Include="src\dvr\gl\core\gl_framebuffer.cpp" />
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_program.cpp" />
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_shader.cpp" />
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture2d.cpp" />
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture3d.cpp" />
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vao.cpp" />
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vbo.cpp" />
+    <ClCompile Include="src\dvr\window\glfw_window.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\unit_cube.cpp" />
-    <ClCompile Include="src\utility.cpp" />
-    <ClCompile Include="src\volume_renderer.cpp" />
-    <ClCompile Include="src\controller.cpp" />
+    <ClCompile Include="src\dvr\model\unit_cube.cpp" />
+    <ClCompile Include="src\dvr\utility\utility.cpp" />
+    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp" />
+    <ClCompile Include="src\dvr\window\controller.cpp" />
     <ClCompile Include="vendor\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\camera.h" />
-    <ClInclude Include="src\gl_framebuffer.h" />
-    <ClInclude Include="src\gl_texture2d.h" />
-    <ClInclude Include="src\gl_texture3d.h" />
-    <ClInclude Include="src\gl_vbo.h" />
-    <ClInclude Include="src\unit_cube.h" />
-    <ClInclude Include="src\gl_debug.h" />
-    <ClInclude Include="src\gl_shader.h" />
-    <ClInclude Include="src\gl_vao.h" />
-    <ClInclude Include="src\gl_window.h" />
-    <ClInclude Include="src\gl_program.h" />
-    <ClInclude Include="src\utility.h" />
-    <ClInclude Include="src\volume_renderer.h" />
-    <ClInclude Include="src\controller.h" />
+    <ClInclude Include="src\dvr\application.h" />
+    <ClInclude Include="src\dvr\camera\camera.h" />
+    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h" />
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h" />
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture3d.h" />
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h" />
+    <ClInclude Include="src\dvr\model\unit_cube.h" />
+    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h" />
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h" />
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h" />
+    <ClInclude Include="src\dvr\window\glfw_window.h" />
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h" />
+    <ClInclude Include="src\dvr\utility\utility.h" />
+    <ClInclude Include="src\dvr\renderer\volume_renderer.h" />
+    <ClInclude Include="src\dvr\window\controller.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\back_face.frag" />
-    <None Include="src\shaders\front_face.frag" />
-    <None Include="src\shaders\pass.vert" />
+    <None Include="src\dvr\gl\shaders\back_face.frag" />
+    <None Include="src\dvr\gl\shaders\front_face.frag" />
+    <None Include="src\dvr\gl\shaders\pass.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

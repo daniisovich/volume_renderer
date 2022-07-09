@@ -18,102 +18,102 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_window.cpp">
+    <ClCompile Include="src\dvr\window\glfw_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_program.cpp">
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_shader.cpp">
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_vao.cpp">
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\unit_cube.cpp">
+    <ClCompile Include="src\dvr\model\unit_cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_vbo.cpp">
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vbo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_framebuffer.cpp">
+    <ClCompile Include="src\dvr\gl\core\gl_framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_texture2d.cpp">
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\controller.cpp">
+    <ClCompile Include="src\dvr\window\controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\camera.cpp">
+    <ClCompile Include="src\dvr\camera\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gl_texture3d.cpp">
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\utility.cpp">
+    <ClCompile Include="src\dvr\utility\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Application.cpp">
+    <ClCompile Include="src\dvr\application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\volume_renderer.cpp">
+    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\gl_window.h">
+    <ClInclude Include="src\dvr\window\glfw_window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_program.h">
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_shader.h">
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_debug.h">
+    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\unit_cube.h">
+    <ClInclude Include="src\dvr\model\unit_cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_vao.h">
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_vbo.h">
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_framebuffer.h">
+    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_texture2d.h">
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\controller.h">
+    <ClInclude Include="src\dvr\window\controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\camera.h">
+    <ClInclude Include="src\dvr\camera\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gl_texture3d.h">
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\utility.h">
+    <ClInclude Include="src\dvr\utility\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Application.h">
+    <ClInclude Include="src\dvr\application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\volume_renderer.h">
+    <ClInclude Include="src\dvr\renderer\volume_renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\pass.vert" />
-    <None Include="src\shaders\front_face.frag" />
-    <None Include="src\shaders\back_face.frag" />
+    <None Include="src\dvr\gl\shaders\pass.vert" />
+    <None Include="src\dvr\gl\shaders\front_face.frag" />
+    <None Include="src\dvr\gl\shaders\back_face.frag" />
   </ItemGroup>
 </Project>
