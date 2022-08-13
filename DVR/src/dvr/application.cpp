@@ -31,14 +31,14 @@ namespace dvr {
 
 	double Application::frametime() const {
 
-		using time_point = std::chrono::high_resolution_clock::time_point;
-		static time_point last_time{ std::chrono::high_resolution_clock::now() };
-		time_point current_time{ std::chrono::high_resolution_clock::now() };
+		using clock = std::chrono::high_resolution_clock;
+		static clock::time_point last_time{ clock::now() };
+		clock::time_point current_time{ clock::now() };
 
 		auto delta = std::chrono::duration_cast<std::chrono::duration<double>>(current_time - last_time);
 		double frametime = delta.count();
 
-		last_time = std::chrono::high_resolution_clock::now();
+		last_time = current_time;
 		return frametime;
 
 	}
