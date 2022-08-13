@@ -14,3 +14,7 @@ Officially supports Windows 10 and Visual Studio 2022. To build the project, do 
 ## Running
 
 You can also run the project without building by running the executable in the `run` folder.
+
+## Controls
+
+You can close the program by pressing `Escape`. With the `left mouse button` the view is rotated. `R` resets the view and you can change the smmothstep start and end value with the `arrow keys`.
