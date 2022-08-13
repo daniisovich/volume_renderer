@@ -1,3 +1,6 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_vbo.h"
 
 

@@ -1,7 +1,7 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_vao.h"
-
-#include <vector>
-
 #include "gl_vbo.h"
 
 

@@ -2,9 +2,6 @@
 .vs/
 bin/
 bin-int/
-DVR/vendor/
 
 # files
 *.user
-*.dat
-*.raw

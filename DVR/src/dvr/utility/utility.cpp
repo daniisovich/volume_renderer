@@ -1,11 +1,9 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "utility.h"
 
-#include <fstream>
-#include <sstream>
-#include <array>
-#include <algorithm>
 #include <iterator>
-
 
 
 struct VolumeInfo {

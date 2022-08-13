@@ -1,3 +1,6 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_texture3d.h"
 
 

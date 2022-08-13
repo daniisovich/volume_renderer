@@ -1,3 +1,6 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "application.h"
 
 #include <chrono>

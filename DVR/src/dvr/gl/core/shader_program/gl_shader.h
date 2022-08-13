@@ -2,8 +2,6 @@
 
 #include <glad/glad.h>
 
-#include <string>
-
 
 struct ShaderInfo {
 	GLenum type;

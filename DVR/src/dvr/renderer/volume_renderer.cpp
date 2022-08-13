@@ -1,3 +1,6 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "volume_renderer.h"
 
 #include "../utility/utility.h"

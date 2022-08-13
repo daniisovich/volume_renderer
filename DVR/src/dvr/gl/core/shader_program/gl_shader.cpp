@@ -1,7 +1,7 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_shader.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
 
 
 std::string loadSource(std::string_view path);

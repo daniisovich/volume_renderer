@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "../gl/core/shader_program/gl_program.h"
 #include "../gl/core/texture/gl_texture2d.h"
 #include "../gl/core/texture/gl_texture3d.h"

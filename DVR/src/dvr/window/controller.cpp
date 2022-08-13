@@ -1,9 +1,9 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "controller.h"
 
-#include <array>
-
 #include <glm/glm.hpp>
-#include <iostream>
 
 namespace dvr {
 	namespace glfw {

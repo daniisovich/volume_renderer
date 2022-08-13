@@ -2,9 +2,6 @@
 
 #include <glad/glad.h>
 
-#include <vector>
-
-
 namespace dvr {
 	namespace gl {
 

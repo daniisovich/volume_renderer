@@ -1,3 +1,6 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "unit_cube.h"
 
 #include <glm/gtc/matrix_transform.hpp>

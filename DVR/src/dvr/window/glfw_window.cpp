@@ -1,7 +1,7 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "glfw_window.h"
-
-#include <stdexcept>
-
 #include "../gl/core/debug/gl_debug.h"
 
 

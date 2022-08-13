@@ -1,14 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -19,49 +11,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{91DF870B-FDE8-877C-8664-9E7CF26C937C}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{77ab2545-e987-4a18-beb9-7259f210eca3}</ProjectGuid>
     <RootNamespace>DVR</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -70,94 +40,78 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-x86_64\{prj.name}\</OutDir>
+    <IntDir>..\bin-int\Debug-x86_64\{prj.name}\</IntDir>
+    <TargetName>DVR</TargetName>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-x86_64\{prj.name}\</OutDir>
+    <IntDir>..\bin-int\Release-x86_64\{prj.name}\</IntDir>
+    <TargetName>DVR</TargetName>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\vendor\glad\include;$(ProjectDir)\vendor\glfw\include;$(ProjectDir)\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\vendor\glfw\lib-vc2022\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\vendor\glad\include;$(ProjectDir)\vendor\glfw\include;$(ProjectDir)\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\vendor\glfw\lib-vc2022\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled/pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;external\glad\include;external\glfw\include;external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\vendor\glad\include;$(ProjectDir)\vendor\glfw\include;$(ProjectDir)\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\vendor\glfw\lib-vc2022\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled/pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;external\glad\include;external\glfw\include;external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)\vendor\glad\include;$(ProjectDir)\vendor\glfw\include;$(ProjectDir)\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\vendor\glfw\lib-vc2022\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\dvr\application.h" />
+    <ClInclude Include="src\dvr\camera\camera.h" />
+    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h" />
+    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h" />
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h" />
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h" />
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h" />
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture3d.h" />
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h" />
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h" />
+    <ClInclude Include="src\dvr\model\unit_cube.h" />
+    <ClInclude Include="src\dvr\renderer\volume_renderer.h" />
+    <ClInclude Include="src\dvr\utility\utility.h" />
+    <ClInclude Include="src\dvr\window\controller.h" />
+    <ClInclude Include="src\dvr\window\glfw_window.h" />
+    <ClInclude Include="src\precompiled\pch.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dvr\application.cpp" />
     <ClCompile Include="src\dvr\camera\camera.cpp" />
@@ -168,35 +122,23 @@
     <ClCompile Include="src\dvr\gl\core\texture\gl_texture3d.cpp" />
     <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vao.cpp" />
     <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vbo.cpp" />
+    <ClCompile Include="src\dvr\model\unit_cube.cpp" />
+    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp" />
+    <ClCompile Include="src\dvr\utility\utility.cpp" />
+    <ClCompile Include="src\dvr\window\controller.cpp" />
     <ClCompile Include="src\dvr\window\glfw_window.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\dvr\model\unit_cube.cpp" />
-    <ClCompile Include="src\dvr\utility\utility.cpp" />
-    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp" />
-    <ClCompile Include="src\dvr\window\controller.cpp" />
-    <ClCompile Include="vendor\glad\src\glad.c" />
+    <ClCompile Include="src\precompiled\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\dvr\application.h" />
-    <ClInclude Include="src\dvr\camera\camera.h" />
-    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h" />
-    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h" />
-    <ClInclude Include="src\dvr\gl\core\texture\gl_texture3d.h" />
-    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h" />
-    <ClInclude Include="src\dvr\model\unit_cube.h" />
-    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h" />
-    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h" />
-    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h" />
-    <ClInclude Include="src\dvr\window\glfw_window.h" />
-    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h" />
-    <ClInclude Include="src\dvr\utility\utility.h" />
-    <ClInclude Include="src\dvr\renderer\volume_renderer.h" />
-    <ClInclude Include="src\dvr\window\controller.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\dvr\gl\shaders\back_face.frag" />
-    <None Include="src\dvr\gl\shaders\front_face.frag" />
-    <None Include="src\dvr\gl\shaders\pass.vert" />
+    <ProjectReference Include="external\glfw\glfw.vcxproj">
+      <Project>{9563977C-819A-980D-2A87-7E10169D140F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="external\glad\glad.vcxproj">
+      <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

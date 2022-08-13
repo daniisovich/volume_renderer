@@ -1,119 +1,142 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="dvr">
+      <UniqueIdentifier>{F16B880B-5D75-887C-E6F0-9E7C52F9937C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="dvr\camera">
+      <UniqueIdentifier>{691B74C0-55D3-B50D-BEDA-8E69AAB150FE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="dvr\gl">
+      <UniqueIdentifier>{F387B9F9-DF29-E4CF-C8E4-F723B4256B20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\gl\core">
+      <UniqueIdentifier>{4B282618-B7DD-9E0D-40D2-98E4AC869511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\gl\core\debug">
+      <UniqueIdentifier>{210F6138-8D25-5FCE-D69C-EAEF42F22F56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\gl\core\shader_program">
+      <UniqueIdentifier>{28A360F7-14B3-0CC8-7D6C-71E6699BFB60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\gl\core\texture">
+      <UniqueIdentifier>{CB0013A6-3762-F0B3-C0CF-36662C302773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\gl\core\vertex_attributes">
+      <UniqueIdentifier>{3E29BA5D-AA41-A187-73EE-3021DFC53521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\model">
+      <UniqueIdentifier>{11561516-7DC0-C98C-C6FE-7A3232A8A7E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\renderer">
+      <UniqueIdentifier>{D74AE9BB-C3AD-7860-6C33-B116587544E3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\utility">
+      <UniqueIdentifier>{54239D64-C0D8-155A-49CD-0F31B5810C5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dvr\window">
+      <UniqueIdentifier>{D893ACEF-C44B-EE3C-2D53-C798192A892D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="precompiled">
+      <UniqueIdentifier>{B96624CA-251C-9DBF-AE10-97961AC593C3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\window\glfw_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\shader_program\gl_program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vendor\glad\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\shader_program\gl_shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vao.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\model\unit_cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vbo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\gl_framebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\texture\gl_texture2d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\window\controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\camera\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\gl\core\texture\gl_texture3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\utility\utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\dvr\window\glfw_window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\model\unit_cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dvr\window\controller.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\dvr\application.h">
+      <Filter>dvr</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\camera\camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>dvr\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\gl\core\debug\gl_debug.h">
+      <Filter>dvr\gl\core\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\gl\core\gl_framebuffer.h">
+      <Filter>dvr\gl\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_program.h">
+      <Filter>dvr\gl\core\shader_program</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\gl\core\shader_program\gl_shader.h">
+      <Filter>dvr\gl\core\shader_program</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\gl\core\texture\gl_texture2d.h">
+      <Filter>dvr\gl\core\texture</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\core\texture\gl_texture3d.h">
-      <Filter>Header Files</Filter>
+      <Filter>dvr\gl\core\texture</Filter>
     </ClInclude>
-    <ClInclude Include="src\dvr\utility\utility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vao.h">
+      <Filter>dvr\gl\core\vertex_attributes</Filter>
     </ClInclude>
-    <ClInclude Include="src\dvr\application.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\dvr\gl\core\vertex_attributes\gl_vbo.h">
+      <Filter>dvr\gl\core\vertex_attributes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\model\unit_cube.h">
+      <Filter>dvr\model</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\renderer\volume_renderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>dvr\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\utility\utility.h">
+      <Filter>dvr\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\window\controller.h">
+      <Filter>dvr\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dvr\window\glfw_window.h">
+      <Filter>dvr\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\precompiled\pch.h">
+      <Filter>precompiled</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\dvr\gl\shaders\pass.vert" />
-    <None Include="src\dvr\gl\shaders\front_face.frag" />
-    <None Include="src\dvr\gl\shaders\back_face.frag" />
+    <ClCompile Include="src\dvr\application.cpp">
+      <Filter>dvr</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\camera\camera.cpp">
+      <Filter>dvr\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\gl_framebuffer.cpp">
+      <Filter>dvr\gl\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_program.cpp">
+      <Filter>dvr\gl\core\shader_program</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\shader_program\gl_shader.cpp">
+      <Filter>dvr\gl\core\shader_program</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture2d.cpp">
+      <Filter>dvr\gl\core\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\texture\gl_texture3d.cpp">
+      <Filter>dvr\gl\core\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vao.cpp">
+      <Filter>dvr\gl\core\vertex_attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\gl\core\vertex_attributes\gl_vbo.cpp">
+      <Filter>dvr\gl\core\vertex_attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\model\unit_cube.cpp">
+      <Filter>dvr\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\renderer\volume_renderer.cpp">
+      <Filter>dvr\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\utility\utility.cpp">
+      <Filter>dvr\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\window\controller.cpp">
+      <Filter>dvr\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dvr\window\glfw_window.cpp">
+      <Filter>dvr\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\precompiled\pch.cpp">
+      <Filter>precompiled</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

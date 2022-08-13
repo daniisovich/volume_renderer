@@ -1,10 +1,9 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_program.h"
 
 #include <glm/gtc/type_ptr.hpp>
-
-#include <stdexcept>
-#include <fstream>
-#include <sstream>
 
 
 void linkStatus(GLuint program_id);

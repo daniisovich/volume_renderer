@@ -1,7 +1,4 @@
 #pragma once
-
-#include <string>
-
 #include "../gl/core/texture/gl_texture3d.h"
 
 

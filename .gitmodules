@@ -1,0 +1,6 @@
+[submodule "DVR/external/glm"]
+	path = DVR/external/glm
+	url = https://github.com/g-truc/glm
+[submodule "DVR/external/glfw"]
+	path = DVR/external/glfw
+	url = https://github.com/daniisovich/glfw

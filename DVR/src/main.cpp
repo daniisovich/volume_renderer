@@ -1,4 +1,5 @@
-#include <iostream>
+#include "precompiled/pch.h"
+#pragma hdrstop
 
 #include "dvr/application.h"
 

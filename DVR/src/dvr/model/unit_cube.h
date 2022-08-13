@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <glm/glm.hpp>
 
 #include "../gl/core/vertex_attributes/gl_vao.h"

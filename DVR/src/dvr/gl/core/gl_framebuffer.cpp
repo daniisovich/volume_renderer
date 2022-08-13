@@ -1,8 +1,9 @@
+#include "precompiled/pch.h"
+#pragma hdrstop
+
 #include "gl_framebuffer.h"
 
 #include <glad/glad.h>
-#include <stdexcept>
-
 
 namespace dvr {
 	namespace gl {

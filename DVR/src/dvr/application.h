@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include "window/glfw_window.h"
 #include "window/controller.h"
 #include "renderer/volume_renderer.h"
