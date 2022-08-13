@@ -1,5 +1,5 @@
 #pragma once
-#include "../gl/core/texture/gl_texture3d.h"
+#include "dvr/gl/texture/gl_texture3d.h"
 
 
 namespace dvr {

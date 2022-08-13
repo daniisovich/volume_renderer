@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "controller.h"
+#include "dvr/window/controller.h"
 
 
 namespace dvr {

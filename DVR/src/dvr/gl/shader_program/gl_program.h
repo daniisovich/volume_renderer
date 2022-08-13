@@ -3,10 +3,9 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-#include "gl_shader.h"
+#include "dvr/gl/shader_program/gl_shader.h"
 
 
-// will maybe change in the future
 struct AttributeInfo {
 	GLint location;
 	GLsizei count;

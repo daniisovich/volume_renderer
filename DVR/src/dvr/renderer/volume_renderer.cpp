@@ -2,8 +2,7 @@
 #pragma hdrstop
 
 #include "volume_renderer.h"
-
-#include "../utility/utility.h"
+#include "dvr/utility/utility.h"
 
 
 namespace dvr {

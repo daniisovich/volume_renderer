@@ -2,7 +2,7 @@
 #pragma hdrstop
 
 #include "gl_vao.h"
-#include "gl_vbo.h"
+#include "dvr/gl/vertex_attributes/gl_vbo.h"
 
 
 namespace dvr {

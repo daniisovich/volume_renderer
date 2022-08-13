@@ -1,6 +1,6 @@
 #pragma once
 
-#include "texture/gl_texture2d.h"
+#include "dvr/gl/texture/gl_texture2d.h"
 
 
 namespace dvr {

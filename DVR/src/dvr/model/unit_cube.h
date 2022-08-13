@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "../gl/core/vertex_attributes/gl_vao.h"
+#include "dvr/gl/vertex_attributes/gl_vao.h"
 
 
 struct Rotation {

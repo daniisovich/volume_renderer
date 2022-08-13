@@ -1,8 +1,8 @@
 #pragma once
 
-#include "window/glfw_window.h"
-#include "window/controller.h"
-#include "renderer/volume_renderer.h"
+#include "dvr/window/glfw_window.h"
+#include "dvr/window/controller.h"
+#include "dvr/renderer/volume_renderer.h"
 
 
 namespace dvr {

@@ -2,7 +2,24 @@
 #pragma hdrstop
 
 #include "glfw_window.h"
-#include "../gl/core/debug/gl_debug.h"
+#include "dvr/gl/debug/gl_debug.h"
+
+
+static const char* to_cstring(int32_t error) {
+	switch (error) {
+	case GLFW_NOT_INITIALIZED: return "GLFW_NOT_INITIALIZED";
+	case GLFW_INVALID_ENUM:	   return "GLFW_INVALID_ENUM";
+	case GLFW_INVALID_VALUE:   return "GLFW_INVALID_VALUE";
+	case GLFW_OUT_OF_MEMORY:   return "GLFW_OUT_OF_MEMORY";
+	case GLFW_API_UNAVAILABLE: return "GLFW_API_UNAVAILABLE";
+	case GLFW_PLATFORM_ERROR:  return "GLFW_PLATFORM_ERROR";
+	default:				   return "UNKOWN";
+	}
+}
+
+static void glfwErrorCallback(int32_t error, const char* description) {
+	std::cerr << "GLFW Error (" << to_cstring(error) << "): " << description << "\n";
+}
 
 
 namespace dvr {
@@ -12,6 +29,7 @@ namespace dvr {
 
 		Window::Window(uint32_t width, uint32_t height, const std::string_view name, const Controller& controller) {
 
+			glfwSetErrorCallback(glfwErrorCallback);
 			if (!glfwInit())
 				throw std::runtime_error("Failed to initialize GLFW");
 

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../gl/core/shader_program/gl_program.h"
-#include "../gl/core/texture/gl_texture2d.h"
-#include "../gl/core/texture/gl_texture3d.h"
-#include "../gl/core/gl_framebuffer.h"
-#include "../model/unit_cube.h"
-#include "../camera/camera.h"
+#include "dvr/gl/shader_program/gl_program.h"
+#include "dvr/gl/texture/gl_texture2d.h"
+#include "dvr/gl/texture/gl_texture3d.h"
+#include "dvr/gl/gl_framebuffer.h"
+#include "dvr/model/unit_cube.h"
+#include "dvr/camera/camera.h"
 
 
 namespace dvr {

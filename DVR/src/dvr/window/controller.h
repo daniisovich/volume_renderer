@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../renderer/volume_renderer.h"
-#include "../camera/camera.h"
-#include "../model/unit_cube.h"
-#include "../gl/core/gl_framebuffer.h"
+#include "dvr/renderer/volume_renderer.h"
+#include "dvr/camera/camera.h"
+#include "dvr/model/unit_cube.h"
+#include "dvr/gl/gl_framebuffer.h"
 
 
 namespace dvr {
