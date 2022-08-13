@@ -25,7 +25,7 @@ static void glfwErrorCallback(int32_t error, const char* description) {
 namespace dvr {
 	namespace glfw {
 
-		Window::Window(const Controller& controller) : Window{ 800, 600, "Window", controller } {}
+		Window::Window(const Controller& controller) : Window{ 800, 600, "Direct Volume Renderer", controller } {}
 
 		Window::Window(uint32_t width, uint32_t height, const std::string_view name, const Controller& controller) {
 

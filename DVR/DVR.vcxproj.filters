@@ -10,20 +10,17 @@
     <Filter Include="dvr\gl">
       <UniqueIdentifier>{F387B9F9-DF29-E4CF-C8E4-F723B4256B20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dvr\gl\core">
-      <UniqueIdentifier>{4B282618-B7DD-9E0D-40D2-98E4AC869511}</UniqueIdentifier>
+    <Filter Include="dvr\gl\debug">
+      <UniqueIdentifier>{C98CF71C-B5EF-86C1-5E75-BF774AB75244}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dvr\gl\core\debug">
-      <UniqueIdentifier>{210F6138-8D25-5FCE-D69C-EAEF42F22F56}</UniqueIdentifier>
+    <Filter Include="dvr\gl\shader_program">
+      <UniqueIdentifier>{D0FD8234-3C6A-3E2F-055E-D68C71896097}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dvr\gl\core\shader_program">
-      <UniqueIdentifier>{28A360F7-14B3-0CC8-7D6C-71E6699BFB60}</UniqueIdentifier>
+    <Filter Include="dvr\gl\texture">
+      <UniqueIdentifier>{73883F0A-5F56-3310-48EA-A33634570F75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dvr\gl\core\texture">
-      <UniqueIdentifier>{CB0013A6-3762-F0B3-C0CF-36662C302773}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="dvr\gl\core\vertex_attributes">
-      <UniqueIdentifier>{3E29BA5D-AA41-A187-73EE-3021DFC53521}</UniqueIdentifier>
+    <Filter Include="dvr\gl\vertex_attributes">
+      <UniqueIdentifier>{E6625251-D287-A1D1-FBD2-8661E756A0EF}</UniqueIdentifier>
     </Filter>
     <Filter Include="dvr\model">
       <UniqueIdentifier>{11561516-7DC0-C98C-C6FE-7A3232A8A7E1}</UniqueIdentifier>
@@ -49,28 +46,28 @@
       <Filter>dvr\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\debug\gl_debug.h">
-      <Filter>dvr\gl\core\debug</Filter>
+      <Filter>dvr\gl\debug</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\gl_framebuffer.h">
-      <Filter>dvr\gl\core</Filter>
+      <Filter>dvr\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\shader_program\gl_program.h">
-      <Filter>dvr\gl\core\shader_program</Filter>
+      <Filter>dvr\gl\shader_program</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\shader_program\gl_shader.h">
-      <Filter>dvr\gl\core\shader_program</Filter>
+      <Filter>dvr\gl\shader_program</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\texture\gl_texture2d.h">
-      <Filter>dvr\gl\core\texture</Filter>
+      <Filter>dvr\gl\texture</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\texture\gl_texture3d.h">
-      <Filter>dvr\gl\core\texture</Filter>
+      <Filter>dvr\gl\texture</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\vertex_attributes\gl_vao.h">
-      <Filter>dvr\gl\core\vertex_attributes</Filter>
+      <Filter>dvr\gl\vertex_attributes</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\gl\vertex_attributes\gl_vbo.h">
-      <Filter>dvr\gl\core\vertex_attributes</Filter>
+      <Filter>dvr\gl\vertex_attributes</Filter>
     </ClInclude>
     <ClInclude Include="src\dvr\model\unit_cube.h">
       <Filter>dvr\model</Filter>
@@ -98,26 +95,29 @@
     <ClCompile Include="src\dvr\camera\camera.cpp">
       <Filter>dvr\camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\dvr\gl\debug\gl_debug.cpp">
+      <Filter>dvr\gl\debug</Filter>
+    </ClCompile>
     <ClCompile Include="src\dvr\gl\gl_framebuffer.cpp">
-      <Filter>dvr\gl\core</Filter>
+      <Filter>dvr\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\shader_program\gl_program.cpp">
-      <Filter>dvr\gl\core\shader_program</Filter>
+      <Filter>dvr\gl\shader_program</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\shader_program\gl_shader.cpp">
-      <Filter>dvr\gl\core\shader_program</Filter>
+      <Filter>dvr\gl\shader_program</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\texture\gl_texture2d.cpp">
-      <Filter>dvr\gl\core\texture</Filter>
+      <Filter>dvr\gl\texture</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\texture\gl_texture3d.cpp">
-      <Filter>dvr\gl\core\texture</Filter>
+      <Filter>dvr\gl\texture</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\vertex_attributes\gl_vao.cpp">
-      <Filter>dvr\gl\core\vertex_attributes</Filter>
+      <Filter>dvr\gl\vertex_attributes</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\gl\vertex_attributes\gl_vbo.cpp">
-      <Filter>dvr\gl\core\vertex_attributes</Filter>
+      <Filter>dvr\gl\vertex_attributes</Filter>
     </ClCompile>
     <ClCompile Include="src\dvr\model\unit_cube.cpp">
       <Filter>dvr\model</Filter>
@@ -138,6 +138,5 @@
     <ClCompile Include="src\precompiled\pch.cpp">
       <Filter>precompiled</Filter>
     </ClCompile>
-    <ClCompile Include="src\dvr\gl\debug\gl_debug.cpp" />
   </ItemGroup>
 </Project>

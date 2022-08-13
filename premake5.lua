@@ -29,16 +29,16 @@ project "DVR"
 	cppdialect "C++17"
 
 	
-	targetdir (bindir .. "/{prj.name}")
-	objdir (intdir .. "/{prj.name}")
+	targetdir (bindir .. "/%{prj.name}")
+	objdir (intdir .. "/%{prj.name}")
 
 	pchheader "precompiled/pch.h"
 	pchsource "DVR/src/precompiled/pch.cpp"
 
 	files
 	{
-		"DVR/src/**.h",
-		"DVR/src/**.cpp",
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
 	}
 
 	defines
@@ -48,7 +48,7 @@ project "DVR"
 
 	includedirs
 	{
-		"DVR/src",
+		"%{prj.name}/src",
 		"DVR/external/glad/include",
 		"DVR/external/glfw/include",
 		"DVR/external/glm"

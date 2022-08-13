@@ -42,15 +42,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-x86_64\{prj.name}\</OutDir>
-    <IntDir>..\bin-int\Debug-x86_64\{prj.name}\</IntDir>
+    <OutDir>..\bin\Debug-x86_64\DVR\</OutDir>
+    <IntDir>..\bin-int\Debug-x86_64\DVR\</IntDir>
     <TargetName>DVR</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-x86_64\{prj.name}\</OutDir>
-    <IntDir>..\bin-int\Release-x86_64\{prj.name}\</IntDir>
+    <OutDir>..\bin\Release-x86_64\DVR\</OutDir>
+    <IntDir>..\bin-int\Release-x86_64\DVR\</IntDir>
     <TargetName>DVR</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
