@@ -6,40 +6,38 @@
 #include "dvr/window/controller.h"
 
 
-namespace dvr {
-	namespace glfw {
+namespace dvr::glfw {
 
-		class Window {
+	class Window {
 
-		public:
+	public:
 
-			Window(const Controller& controller);
-			Window(uint32_t width, uint32_t height, const std::string_view name, const Controller& controller);
-			~Window();
+		Window(const Controller& controller);
+		Window(uint32_t width, uint32_t height, const std::string_view name, const Controller& controller);
+		~Window();
 
-			Window(const Window&) = delete;
-			Window& operator=(const Window&) = delete;
+		Window(const Window&) = delete;
+		Window& operator=(const Window&) = delete;
 
-			Window(Window&& other) noexcept;
-			Window& operator=(Window&& other) noexcept;
+		Window(Window&& other) noexcept;
+		Window& operator=(Window&& other) noexcept;
 
-			std::pair<uint32_t, uint32_t> size() const;
+		std::pair<uint32_t, uint32_t> size() const;
 
-			inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }
-			inline void swapAndPoll() const {
-				glfwSwapBuffers(m_window);
-				glfwPollEvents();
-			}
+		inline bool shouldClose() const { return glfwWindowShouldClose(m_window); }
+		inline void swapAndPoll() const {
+			glfwSwapBuffers(m_window);
+			glfwPollEvents();
+		}
 
-			inline const GLFWwindow* window() const { return m_window; }
+		inline const GLFWwindow* window() const { return m_window; }
 
-		private:
+	private:
 
-			void release();
+		void release();
 
-			GLFWwindow* m_window;
+		GLFWwindow* m_window;
 
-		};
+	};
 
-	}
 }

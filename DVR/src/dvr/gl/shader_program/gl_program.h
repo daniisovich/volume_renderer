@@ -19,54 +19,52 @@ struct UniformInfo {
 };
 
 
-namespace dvr {
-	namespace gl {
+namespace dvr::gl {
 
-		class Program {
+	class Program {
 
-		public:
+	public:
 
-			Program(const std::vector<ShaderInfo>& shader_infos);
+		Program(const std::vector<ShaderInfo>& shader_infos);
 
-			Program() = delete;
-			Program(const Program&) = delete;
-			Program& operator=(const Program&) = delete;
-			~Program() = default;
+		Program() = delete;
+		Program(const Program&) = delete;
+		Program& operator=(const Program&) = delete;
+		~Program() = default;
 
-			Program(Program&& other) noexcept;
-			Program& operator=(Program&& other) noexcept;
+		Program(Program&& other) noexcept;
+		Program& operator=(Program&& other) noexcept;
 
-			inline void enable() const { glUseProgram(m_id.value); }
-			inline void disable() const { glUseProgram(0); }
-			inline void validate() const { glValidateProgram(m_id.value); }
+		inline void enable() const { glUseProgram(m_id.value); }
+		inline void disable() const { glUseProgram(0); }
+		inline void validate() const { glValidateProgram(m_id.value); }
 
-			void setUniform(const char* name, GLint value);
-			void setUniform(const char* name, GLfloat value);
-			void setUniform(const char* name, const glm::mat4& matrix);
+		void setUniform(const char* name, GLint value);
+		void setUniform(const char* name, GLfloat value);
+		void setUniform(const char* name, const glm::mat4& matrix);
 
-			void setUniform(GLint location, GLint value) const;
-			void setUniform(GLint location, GLfloat value) const;
-			void setUniform(GLint location, const glm::mat4& matrix) const;
+		void setUniform(GLint location, GLint value) const;
+		void setUniform(GLint location, GLfloat value) const;
+		void setUniform(GLint location, const glm::mat4& matrix) const;
 
-			inline GLint attributeLocation(const std::string& name) { return m_attributes[name].location; }
+		inline GLint attributeLocation(const std::string& name) { return m_attributes[name].location; }
 
-		private:
+	private:
 
-			void retrieveAttributes();
-			void retrieveUniforms();
-			GLint retrieveValue(GLenum type) const;
+		void retrieveAttributes();
+		void retrieveUniforms();
+		GLint retrieveValue(GLenum type) const;
 
-			struct ID {
-				ID() : value{ glCreateProgram() } {}
-				~ID() { release(); }
-				void release() { glDeleteProgram(value); value = 0; }
-				GLuint value{ 0 };
-			} m_id;
+		struct ID {
+			ID() : value{ glCreateProgram() } {}
+			~ID() { release(); }
+			void release() { glDeleteProgram(value); value = 0; }
+			GLuint value{ 0 };
+		} m_id;
 
-			std::unordered_map<std::string, AttributeInfo> m_attributes{};
-			std::unordered_map<std::string, UniformInfo> m_uniforms{};
+		std::unordered_map<std::string, AttributeInfo> m_attributes{};
+		std::unordered_map<std::string, UniformInfo> m_uniforms{};
 
-		};
+	};
 
-	}
 }

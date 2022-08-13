@@ -2,10 +2,8 @@
 #include "dvr/gl/texture/gl_texture3d.h"
 
 
-namespace dvr {
-	namespace utility {
+namespace dvr::utility {
 
-		gl::Texture3D loadVolume(const std::string_view path);
+	gl::Texture3D loadVolume(const std::string_view path);
 
-	}
 }

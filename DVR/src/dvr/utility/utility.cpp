@@ -15,38 +15,36 @@ struct VolumeInfo {
 };
 
 
-VolumeInfo parseMetadata(const std::string_view path);
-void getInternalFormat(VolumeInfo& info);
-void parseLine(const std::string& line, VolumeInfo& info);
-std::vector<uint8_t> loadVolumeData(std::string_view path);
+static VolumeInfo parseMetadata(const std::string_view path);
+static void getInternalFormat(VolumeInfo& info);
+static void parseLine(const std::string& line, VolumeInfo& info);
+static std::vector<uint8_t> loadVolumeData(std::string_view path);
 
-namespace dvr {
-	namespace utility {
+namespace dvr::utility {
 
-		gl::Texture3D loadVolume(const std::string_view path) {
+	gl::Texture3D loadVolume(const std::string_view path) {
 
-			VolumeInfo volume_info{ parseMetadata(path) };
-			getInternalFormat(volume_info);
+		VolumeInfo volume_info{ parseMetadata(path) };
+		getInternalFormat(volume_info);
 
-			const std::string base_path{ path.substr(0, path.find_last_of("/") + 1) };
-			std::vector<uint8_t> volume{ loadVolumeData(base_path + volume_info.filename) };
+		const std::string base_path{ path.substr(0, path.find_last_of("/") + 1) };
+		std::vector<uint8_t> volume{ loadVolumeData(base_path + volume_info.filename) };
 
-			const std::vector<std::pair<GLenum, GLenum>> texture_params{
-				{ GL_TEXTURE_MIN_FILTER, GL_LINEAR },
-				{ GL_TEXTURE_MAG_FILTER, GL_LINEAR },
-				{ GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER },
-				{ GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER },
-				{ GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER },
-			};
+		const std::vector<std::pair<GLenum, GLenum>> texture_params{
+			{ GL_TEXTURE_MIN_FILTER, GL_LINEAR },
+			{ GL_TEXTURE_MAG_FILTER, GL_LINEAR },
+			{ GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER },
+			{ GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER },
+			{ GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER },
+		};
 
-			if (volume.size() != volume_info.size[0] * volume_info.size[1] * volume_info.size[2])
-				throw std::runtime_error("Data of volume does not match with dimensions");
+		if (volume.size() != volume_info.size[0] * volume_info.size[1] * volume_info.size[2])
+			throw std::runtime_error("Data of volume does not match with dimensions");
 
-			return std::move(gl::Texture3D(volume_info.format, volume_info.internal_format, volume_info.size, volume_info.type, volume, texture_params));
-
-		}
+		return std::move(gl::Texture3D(volume_info.format, volume_info.internal_format, volume_info.size, volume_info.type, volume, texture_params));
 
 	}
+
 }
 
 VolumeInfo parseMetadata(const std::string_view path) {

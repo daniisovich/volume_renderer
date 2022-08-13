@@ -4,41 +4,39 @@
 #include "gl_shader.h"
 
 
-std::string loadSource(std::string_view path);
-void compileStatus(GLuint shader_id);
-std::string shaderType(GLuint shader_id);
+static std::string loadSource(std::string_view path);
+static void compileStatus(GLuint shader_id);
+static std::string shaderType(GLuint shader_id);
 
 
-namespace dvr {
-	namespace gl {
+namespace dvr::gl {
 
-		Shader::Shader(ShaderInfo info) : m_id{ info.type } {
+	Shader::Shader(ShaderInfo info) : m_id{ info.type } {
 
-			const std::string source_str{ loadSource(info.path) };
-			const char* source{ source_str.c_str() };
+		const std::string source_str{ loadSource(info.path) };
+		const char* source{ source_str.c_str() };
 
-			glShaderSource(m_id.value, 1, &source, nullptr);
+		glShaderSource(m_id.value, 1, &source, nullptr);
 
-			glCompileShader(m_id.value);
-			compileStatus(m_id.value);
-
-		}
-
-		Shader::Shader(Shader&& other) noexcept : m_id{ other.m_id } {
-			other.m_id.value = 0;
-		}
-
-		Shader& Shader::operator=(Shader&& other) noexcept {
-
-			if (this != &other) {
-				m_id.release();
-				std::swap(m_id, other.m_id);
-			}
-			return *this;
-
-		}
+		glCompileShader(m_id.value);
+		compileStatus(m_id.value);
 
 	}
+
+	Shader::Shader(Shader&& other) noexcept : m_id{ other.m_id } {
+		other.m_id.value = 0;
+	}
+
+	Shader& Shader::operator=(Shader&& other) noexcept {
+
+		if (this != &other) {
+			m_id.release();
+			std::swap(m_id, other.m_id);
+		}
+		return *this;
+
+	}
+
 }
 
 

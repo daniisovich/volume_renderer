@@ -3,35 +3,33 @@
 #include <glad/glad.h>
 
 
-namespace dvr {
-	namespace gl {
+namespace dvr::gl {
 
-		class Vao {
+	class Vao {
 
-		public:
+	public:
 
-			Vao();
-			~Vao();
+		Vao();
+		~Vao();
 
-			Vao(const Vao&) = delete;
-			Vao& operator=(const Vao&) = delete;
+		Vao(const Vao&) = delete;
+		Vao& operator=(const Vao&) = delete;
 
-			Vao(Vao&& other) noexcept;
-			Vao& operator=(Vao&& other) noexcept;
+		Vao(Vao&& other) noexcept;
+		Vao& operator=(Vao&& other) noexcept;
 
-			void add(const std::vector<float>& data, int attrib_location, int attrib_size, int stride, int offset = 0, bool normalized = false) const;
-			void add(const std::vector<uint32_t>& data) const;
+		void add(const std::vector<float>& data, int attrib_location, int attrib_size, int stride, int offset = 0, bool normalized = false) const;
+		void add(const std::vector<uint32_t>& data) const;
 
-			inline void bind() const { glBindVertexArray(m_id); }
-			inline void unbind() const { glBindVertexArray(0); }
+		inline void bind() const { glBindVertexArray(m_id); }
+		inline void unbind() const { glBindVertexArray(0); }
 
-		private:
+	private:
 
-			void release();
+		void release();
 
-			GLuint m_id{ 0 };
+		GLuint m_id{ 0 };
 
-		};
+	};
 
-	}
 }
