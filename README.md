@@ -17,4 +17,4 @@ You can also run the project without building by running the executable in the `
 
 ## Controls
 
-You can close the program by pressing `Escape`. With the `left mouse button` the view is rotated. `R` resets the view and you can change the smmothstep start and end value with the `arrow keys`.
+You can close the program by pressing `Escape`. With the `left mouse button`, the view is rotated. `R` resets the view, and you can change the smooth step start and end value with the `arrow keys`.
