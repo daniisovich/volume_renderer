@@ -10,8 +10,8 @@ namespace dvr {
 	namespace renderer {
 		
 		VolumeRenderer::VolumeRenderer(const std::array<uint32_t, 2>& viewport_size) :
-			m_first_pass(std::vector<ShaderInfo>{ {GL_VERTEX_SHADER, "src/dvr/gl/shaders/pass.vert"}, { GL_FRAGMENT_SHADER, "src/dvr/gl/shaders/front_face.frag" }}),
-			m_second_pass(std::vector<ShaderInfo>{ {GL_VERTEX_SHADER, "src/dvr/gl/shaders/pass.vert"}, { GL_FRAGMENT_SHADER, "src/dvr/gl/shaders/back_face.frag" }}),
+			m_first_pass(std::vector<ShaderInfo>{ {GL_VERTEX_SHADER, "shaders/pass.vert"}, { GL_FRAGMENT_SHADER, "shaders/front_face.frag" }}),
+			m_second_pass(std::vector<ShaderInfo>{ {GL_VERTEX_SHADER, "shaders/pass.vert"}, { GL_FRAGMENT_SHADER, "shaders/back_face.frag" }}),
 			m_front_faces{ GL_RGBA8, viewport_size, 0, 0 },
 			m_volume_tex{ utility::loadVolume("data/bonsai.dat") },
 			m_cube{ m_first_pass.attributeLocation("vert_position") },
